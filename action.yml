@@ -1,0 +1,38 @@
+name: mdBook Action with plugins
+description: A github action that installs mdBook and optional some popular mdbook plugins
+author: "UsingPython"
+inputs:
+  token:
+    description: "Github token"
+    required: true
+  mdbook-version:
+    description: "mdBook version that should be used (e.g. v0.2.2 or 0.2.2)"
+    required: false
+    default: "latest"
+  use-katex:
+    description: "Use katex plugin (true / false)"
+    required: false
+    default: false
+  katex-version:
+    description: "katex version that should be used (e.g. v0.2.2 or 0.2.2)"
+    required: false,
+    default: "latest"
+  use-linkcheck:
+    description: "Use linkcheck plugin (true / false)"
+    required: false
+    default: false
+  linkcheck-version:
+    description: "linkcheck version that should be used (e.g. v0.2.2 or 0.2.2)"
+    required: false,
+    default: "latest"
+  use-epub:
+    description: "Use epub plugin (true / false)"
+    required: false
+    default: false
+  epub-version:
+    description: "epub version that should be used (e.g. v0.2.2 or 0.2.2)"
+    required: false,
+    default: "latest"
+runs:
+  using: "node12"
+  main: "./dist/index.js"

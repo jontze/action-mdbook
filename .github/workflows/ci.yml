@@ -1,0 +1,52 @@
+name: CI
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+      - develop
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Check lint
+        run: yarn lint
+  unittests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Run unittests
+        run: yarn test
+  build:
+    needs: [lint, unittests]
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Build
+        run: yarn build
+      - name: Run local action wit latest tags
+        uses: ./
+        with:
+          token: ${{secrets.GITHUB_TOKEN}}
+          use-linkcheck: true
+      - name: Test mdBook binary
+        run: mdbook --version
+      - name: Test mdbook-linkcheck binary
+        run: mdbook-linkcheck --version
+      - name: Add Change and commit
+        uses: EndBug/add-and-commit@v7.2.1
+        with:
+          add: "./dist --force"
+          default_author: github_actions
+          message: "chore: Generate dist files [skip ci]"

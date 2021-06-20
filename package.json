@@ -1,0 +1,32 @@
+{
+  "name": "actions-mdbook-plugins",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && ncc build ./dist/main.js",
+    "format": "prettier --write .",
+    "lint": "prettier --check .",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@actions/core": "^1.4.0",
+    "@actions/exec": "^1.1.0",
+    "@actions/github": "^5.0.0",
+    "@actions/tool-cache": "^1.7.1",
+    "semver": "^7.3.5"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.12.3",
+    "@types/semver": "^7.3.6",
+    "@vercel/ncc": "^0.28.6",
+    "jest": "^27.0.4",
+    "prettier": "^2.3.1",
+    "ts-jest": "^27.0.3",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.4"
+  }
+}
