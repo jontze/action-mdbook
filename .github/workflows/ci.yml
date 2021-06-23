@@ -50,3 +50,24 @@ jobs:
           add: "./dist --force"
           default_author: github_actions
           message: "chore: Generate dist files [skip ci]"
+  release:
+    needs: [build, sonarcloud]
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: Install Packages
+        run: yarn install --frozen-lockfile
+      - name: Build Step
+        env:
+          Test: ""
+        run: yarn build
+      - name: Run Semantic Release
+        run: yarn semantic-release --dry-run
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
