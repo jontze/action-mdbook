@@ -22,4 +22,4 @@ runs:
   main: "./dist/index.js"
 branding:
   icon: "book"
-  color: "grey"
+  color: "gray-dark"
