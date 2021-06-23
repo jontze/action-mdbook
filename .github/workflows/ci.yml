@@ -67,7 +67,7 @@ jobs:
           Test: ""
         run: yarn build
       - name: Run Semantic Release
-        run: yarn semantic-release --dry-run
+        run: yarn semantic-release
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
