@@ -13,7 +13,7 @@
   "author": "UsingPython",
   "repository": {
     "type": "git",
-    "url": "ttps://github.com/UsingPython/action-mdbook"
+    "url": "https://github.com/UsingPython/action-mdbook"
   },
   "license": "MIT",
   "dependencies": {
