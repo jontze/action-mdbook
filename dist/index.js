@@ -49,14 +49,6 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
         const linkcheckPlugin = new Linkcheck_1.Linkcheck();
         yield linkcheckPlugin.setup();
     }
-    // TODO: Epub - 3rd party backend plugin for mdbook
-    if (core.getBooleanInput("use-epub") === true) {
-        // use epub
-    }
-    // TODO: Katex - 3rd party preprocessor plugin for mdbook
-    if (core.getBooleanInput("use-katex") === true) {
-        // use KAtex plugin
-    }
 });
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
