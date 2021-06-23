@@ -15,16 +15,6 @@ const run = async () => {
     const linkcheckPlugin = new Linkcheck();
     await linkcheckPlugin.setup();
   }
-
-  // TODO: Epub - 3rd party backend plugin for mdbook
-  if (core.getBooleanInput("use-epub") === true) {
-    // use epub
-  }
-
-  // TODO: Katex - 3rd party preprocessor plugin for mdbook
-  if (core.getBooleanInput("use-katex") === true) {
-    // use KAtex plugin
-  }
 };
 
 (async (): Promise<void> => {

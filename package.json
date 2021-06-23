@@ -1,8 +1,8 @@
 {
-  "name": "actions-mdbook-plugins",
+  "name": "action-mdbook",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Github action to setup mdbook and optional the mdbook-linkcheck plugin ",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc && ncc build ./dist/main.js",
     "format": "prettier --write .",
