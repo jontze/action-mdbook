@@ -1,4 +1,4 @@
-commitsOnly: true
+titleAndCommits: true
 types:
   - feat
   - fix
