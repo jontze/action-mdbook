@@ -1,4 +1,3 @@
-import * as gh from "@actions/github";
 import * as core from "@actions/core";
 import { MdBook } from "./mdbook/MdBook";
 import { Linkcheck } from "./mdbook/plugins/Linkcheck";
@@ -20,7 +19,7 @@ const run = async () => {
 (async (): Promise<void> => {
   try {
     await run();
-  } catch (err) {
+  } catch (err: any) {
     core.setFailed(`${err.message}`);
   }
 })();
