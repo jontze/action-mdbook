@@ -78,7 +78,7 @@ describe("Repo", () => {
     const r = new Repo("owner/repo");
     try {
       await r.getReleases();
-    } catch (e) {
+    } catch (e: any) {
       expect(spyGetInput).toHaveBeenCalledWith("token");
       expect(e.message).toContain("failed with status code");
       expect(mockListReleases).toHaveBeenCalledWith({
@@ -107,7 +107,7 @@ describe("Repo", () => {
     const r = new Repo("owner/repo");
     try {
       await r.getLatestRelease();
-    } catch (e) {
+    } catch (e: any) {
       expect(spyGetInput).toHaveBeenCalledWith("token");
       expect(e.message).toContain("failed with status code");
       expect(mockGetLatestRelease).toHaveBeenCalledWith({
@@ -139,7 +139,7 @@ describe("Repo", () => {
     const r = new Repo("owner/repo");
     try {
       await r.getReleaseByTag(tag);
-    } catch (e) {
+    } catch (e: any) {
       expect(spyGetInput).toHaveBeenCalledWith("token");
       expect(e.message).toContain("failed with status code");
       expect(mockGetReleaseByTag).toHaveBeenCalledWith({

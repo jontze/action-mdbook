@@ -113,7 +113,7 @@ describe("MdBook", () => {
     const book = new MdBook();
     try {
       await book.setup();
-    } catch (err) {
+    } catch (err: any) {
       expect(err.message).toBe("Download url not found!");
     }
 
@@ -178,7 +178,7 @@ describe("MdBook", () => {
     const book = new MdBook();
     try {
       await book.setup();
-    } catch (err) {
+    } catch (err: any) {
       expect(err.message).toBe("Download url not found!");
     }
 
