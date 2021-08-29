@@ -153,7 +153,7 @@ describe("Linkcheck", () => {
     try {
       const linkcheck = new Linkcheck();
       await linkcheck.setup();
-    } catch (err) {
+    } catch (err: any) {
       expect(err.message).toBe("Download url not found!");
     }
     expect(spyPlatform).toHaveBeenCalledTimes(1);
@@ -177,7 +177,7 @@ describe("Linkcheck", () => {
     try {
       const linkcheck = new Linkcheck();
       await linkcheck.setup();
-    } catch (err) {
+    } catch (err: any) {
       expect(err.message).toContain("failed with exit code 1");
     }
     expect(spyPlatform).toHaveBeenCalledTimes(1);
@@ -265,7 +265,7 @@ describe("Linkcheck", () => {
     try {
       const linkcheck = new Linkcheck();
       await linkcheck.setup();
-    } catch (err) {
+    } catch (err: any) {
       expect(err.message).toBe("Download url not found!");
     }
 
