@@ -1,4 +1,4 @@
-# mdBook Github Action with Plugin Support
+# MdBook Github Action with Linkchecker Plugin
 
 ## Introduction
 
