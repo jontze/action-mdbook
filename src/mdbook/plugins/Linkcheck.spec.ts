@@ -28,6 +28,10 @@ describe("Linkcheck", () => {
     [name: string, options?: core.InputOptions]
   >;
   let spyInfo: jest.SpyInstance<void, [message: string]>;
+  let spyWarning: jest.SpyInstance<
+    void,
+    [message: string | Error, properties?: core.AnnotationProperties]
+  >;
   let spyAddPath: jest.SpyInstance<void, [inputPath: string]>;
   let spyDownloadTool: jest.SpyInstance<
     Promise<string>,
@@ -50,6 +54,7 @@ describe("Linkcheck", () => {
     spyPlatform = jest.spyOn(os, "platform").mockReturnValue("linux");
     spyGetInput = jest.spyOn(core, "getInput");
     spyInfo = jest.spyOn(core, "info");
+    spyWarning = jest.spyOn(core, "warning");
     spyAddPath = jest.spyOn(core, "addPath");
     spyDownloadTool = jest.spyOn(tc, "downloadTool");
     spyExtractTar = jest.spyOn(tc, "extractTar");
@@ -120,6 +125,7 @@ describe("Linkcheck", () => {
   });
 
   it("should setup latest Linkchecker version and unpack zip", async () => {
+    expect.assertions(9);
     spyExec.mockResolvedValueOnce(0);
     spyExtractZip.mockResolvedValueOnce("extractedPath");
     spyDownloadTool.mockResolvedValueOnce("downloadPath");
@@ -143,6 +149,7 @@ describe("Linkcheck", () => {
   });
 
   it("should fail on setup latest Linkchecker version due to missing linux binary", async () => {
+    expect.assertions(11);
     spyExec.mockResolvedValueOnce(0);
     spyExtractTar.mockResolvedValueOnce("extractedPath");
     spyDownloadTool.mockResolvedValueOnce("downloadPath");
@@ -150,6 +157,49 @@ describe("Linkcheck", () => {
     mockGetLatestRelease.mockResolvedValueOnce({
       assets: [],
     });
+    mockGetReleases.mockResolvedValueOnce([]);
+    try {
+      const linkcheck = new Linkcheck();
+      await linkcheck.setup();
+    } catch (err: any) {
+      expect(err.message).toBe("No release found with a matching linux binary");
+    }
+    expect(spyPlatform).toHaveBeenCalledTimes(1);
+    expect(spyGetInput).toBeCalledTimes(1);
+    expect(spyInfo).toHaveBeenCalledTimes(1);
+    expect(spyWarning).toHaveBeenCalledTimes(2);
+    expect(mockGetLatestRelease).toHaveBeenCalledTimes(1);
+    expect(mockGetReleases).toHaveBeenCalledTimes(1);
+    expect(spyExec).not.toHaveBeenCalledTimes(1);
+    expect(spyDownloadTool).not.toHaveBeenCalledTimes(1);
+    expect(spyExtractTar).not.toHaveBeenCalledTimes(1);
+    expect(spyAddPath).not.toHaveBeenCalledTimes(1);
+  });
+
+  it("should fail on setup latest linkchecker version due to missing download url in release", async () => {
+    expect.assertions(12);
+    spyExec.mockResolvedValueOnce(0);
+    spyExtractTar.mockResolvedValueOnce("extractedPath");
+    spyDownloadTool.mockResolvedValueOnce("downloadPath");
+    spyGetInput.mockReturnValueOnce("latest");
+    mockGetLatestRelease.mockResolvedValueOnce({
+      assets: [],
+    });
+    mockGetReleases.mockResolvedValueOnce([
+      {
+        prerelease: false,
+        tag_name: "tag",
+        assets: [
+          {
+            browser_download_url: "unknown-linux-gnu.zip",
+          },
+        ],
+      },
+    ]);
+    mockGetReleaseByTag.mockResolvedValueOnce({
+      assets: [],
+    });
+
     try {
       const linkcheck = new Linkcheck();
       await linkcheck.setup();
@@ -158,12 +208,59 @@ describe("Linkcheck", () => {
     }
     expect(spyPlatform).toHaveBeenCalledTimes(1);
     expect(spyGetInput).toBeCalledTimes(1);
-    expect(spyInfo).toHaveBeenCalledTimes(1);
+    expect(spyInfo).toHaveBeenCalledTimes(2);
+    expect(spyWarning).toHaveBeenCalledTimes(2);
     expect(mockGetLatestRelease).toHaveBeenCalledTimes(1);
+    expect(mockGetReleases).toHaveBeenCalledTimes(1);
+    expect(mockGetReleaseByTag).toHaveBeenCalledWith("tag");
     expect(spyExec).not.toHaveBeenCalledTimes(1);
     expect(spyDownloadTool).not.toHaveBeenCalledTimes(1);
     expect(spyExtractTar).not.toHaveBeenCalledTimes(1);
     expect(spyAddPath).not.toHaveBeenCalledTimes(1);
+  });
+
+  it("should fail to setup latest linkcheck due to missing binary, setup older version", async () => {
+    expect.assertions(11);
+    spyExec.mockResolvedValueOnce(0);
+    spyExtractTar.mockResolvedValueOnce("extractedPath");
+    spyDownloadTool.mockResolvedValueOnce("downloadPath");
+    spyGetInput.mockReturnValueOnce("latest");
+    mockGetLatestRelease.mockResolvedValueOnce({
+      assets: [],
+    });
+    mockGetReleases.mockResolvedValueOnce([
+      {
+        prerelease: false,
+        tag_name: "tag",
+        assets: [
+          {
+            browser_download_url: "unknown-linux-gnu.zip",
+          },
+        ],
+      },
+    ]);
+    mockGetReleaseByTag.mockResolvedValueOnce({
+      assets: [
+        {
+          browser_download_url: "unknown-linux-gnu.downloadurl.tar",
+        },
+      ],
+    });
+
+    const linkcheck = new Linkcheck();
+    await linkcheck.setup();
+
+    expect(spyPlatform).toHaveBeenCalledTimes(1);
+    expect(spyGetInput).toBeCalledTimes(1);
+    expect(spyInfo).toHaveBeenCalledTimes(4);
+    expect(spyWarning).toHaveBeenCalledTimes(2);
+    expect(mockGetLatestRelease).toHaveBeenCalledTimes(1);
+    expect(mockGetReleases).toHaveBeenCalledTimes(1);
+    expect(mockGetReleaseByTag).toHaveBeenCalledWith("tag");
+    expect(spyExec).toHaveBeenCalledTimes(1);
+    expect(spyDownloadTool).toHaveBeenCalledTimes(1);
+    expect(spyExtractTar).toHaveBeenCalledTimes(1);
+    expect(spyAddPath).toHaveBeenCalledTimes(1);
   });
 
   it("should fail on setup latest Linkchecker version due to fail to convert binary to executable", async () => {
