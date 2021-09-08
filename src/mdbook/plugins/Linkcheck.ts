@@ -28,11 +28,37 @@ export class Linkcheck {
   private async getDownloadUrl(): Promise<string> {
     if (this.version.wanted === "latest") {
       // Download latest release
-      const downloadUrl = (await this.repo.getLatestRelease()).assets.find(
+      let downloadUrl = (await this.repo.getLatestRelease()).assets.find(
         (asset) => asset.browser_download_url.includes("unknown-linux-gnu")
       );
       if (downloadUrl == null) {
-        throw new Error("Download url not found!");
+        // Fetch all releases and use the latest release with a matching binary
+        core.warning("The latest release doesn't include a valid binary...");
+        core.warning("Searching for older release...");
+        let version: string | null = null;
+        const releases = await this.repo.getReleases();
+        releases.forEach((release) => {
+          if (
+            version == null &&
+            release.prerelease === false &&
+            release.assets.length !== 0 &&
+            release.assets.find((asset) =>
+              asset.browser_download_url.includes("unknown-linux-gnu")
+            )
+          ) {
+            version = release.tag_name;
+          }
+        });
+        if (version == null) {
+          throw new Error("No release found with a matching linux binary");
+        }
+        core.info(`Latest version with a valid release binary is: ${version}`);
+        downloadUrl = (await this.repo.getReleaseByTag(version)).assets.find(
+          (asset) => asset.browser_download_url.includes("unknown-linux-gnu")
+        );
+        if (downloadUrl == null) {
+          throw new Error("Download url not found!");
+        }
       }
       return downloadUrl.browser_download_url;
     } else {
