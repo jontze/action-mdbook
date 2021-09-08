@@ -54,9 +54,29 @@ class Linkcheck {
         return __awaiter(this, void 0, void 0, function* () {
             if (this.version.wanted === "latest") {
                 // Download latest release
-                const downloadUrl = (yield this.repo.getLatestRelease()).assets.find((asset) => asset.browser_download_url.includes("unknown-linux-gnu"));
+                let downloadUrl = (yield this.repo.getLatestRelease()).assets.find((asset) => asset.browser_download_url.includes("unknown-linux-gnu"));
                 if (downloadUrl == null) {
-                    throw new Error("Download url not found!");
+                    // Fetch all releases and use the latest release with a matching binary
+                    core.warning("The latest release doesn't include a valid binary...");
+                    core.warning("Searching for older release...");
+                    let version = null;
+                    const releases = yield this.repo.getReleases();
+                    releases.forEach((release) => {
+                        if (version == null &&
+                            release.prerelease === false &&
+                            release.assets.length !== 0 &&
+                            release.assets.find((asset) => asset.browser_download_url.includes("unknown-linux-gnu"))) {
+                            version = release.tag_name;
+                        }
+                    });
+                    if (version == null) {
+                        throw new Error("No release found with a matching linux binary");
+                    }
+                    core.info(`Latest version with a valid release binary is: ${version}`);
+                    downloadUrl = (yield this.repo.getReleaseByTag(version)).assets.find((asset) => asset.browser_download_url.includes("unknown-linux-gnu"));
+                    if (downloadUrl == null) {
+                        throw new Error("Download url not found!");
+                    }
                 }
                 return downloadUrl.browser_download_url;
             }
