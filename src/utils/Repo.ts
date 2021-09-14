@@ -1,5 +1,5 @@
-import * as github from "@actions/github";
-import * as core from "@actions/core";
+import { getOctokit } from "@actions/github";
+import { getInput } from "@actions/core";
 import { Octokit } from "@octokit/core";
 import { PaginateInterface } from "@octokit/plugin-paginate-rest";
 import { Api } from "@octokit/plugin-rest-endpoint-methods/dist-types/types";
@@ -8,9 +8,9 @@ type GhOctoKit = Octokit & Api & { paginate: PaginateInterface };
 
 export class Repo {
   private readonly token?: string;
-  private readonly owner: string;
-  private readonly project: string;
   private readonly octokit: GhOctoKit;
+  readonly owner: string;
+  readonly project: string;
 
   constructor(repository: string) {
     [this.owner, this.project] = repository.split("/");
@@ -21,11 +21,15 @@ export class Repo {
       throw new Error("Projekt name not defined");
     }
 
-    this.token = core.getInput("token");
+    this.token = getInput("token");
     if (this.token == null || this.token === "") {
       throw new Error("GitHub token not found");
     }
-    this.octokit = github.getOctokit(this.token);
+    this.octokit = getOctokit(this.token);
+  }
+
+  toString(): string {
+    return `${this.owner}/${this.project}`;
   }
 
   async getReleases() {
