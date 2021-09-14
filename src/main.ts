@@ -1,6 +1,9 @@
 import * as core from "@actions/core";
 import { MdBook } from "./mdbook/MdBook";
 import { Linkcheck } from "./mdbook/plugins/Linkcheck";
+import { Mermaid } from "./mdbook/plugins/Mermaid";
+import { OpenGh } from "./mdbook/plugins/OpenGh";
+import { Toc } from "./mdbook/plugins/Toc";
 
 /**
  * Run the action async
@@ -13,6 +16,24 @@ const run = async () => {
   if (core.getBooleanInput("use-linkcheck") === true) {
     const linkcheckPlugin = new Linkcheck();
     await linkcheckPlugin.setup();
+  }
+
+  // Mermaid - 3rd party preprocessor plugin for mdbook
+  if (core.getBooleanInput("use-mermaid") === true) {
+    const mermaidPlugin = new Mermaid();
+    await mermaidPlugin.setup();
+  }
+
+  // Toc - 3rd party preprocessor plugin for mdbook
+  if (core.getBooleanInput("use-toc") === true) {
+    const tocPlugin = new Toc();
+    await tocPlugin.setup();
+  }
+
+  // Open-On-Gh - 3rd party preprocessor plugin for mdbook
+  if (core.getBooleanInput("use-opengh") === true) {
+    const openGhPlugin = new OpenGh();
+    await openGhPlugin.setup();
   }
 };
 
