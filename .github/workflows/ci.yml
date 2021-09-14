@@ -72,6 +72,12 @@ jobs:
         run: mdbook --version
       - name: Test mdbook-linkcheck binary
         run: mdbook-linkcheck --version
+      - name: Test mdbook-mermaid binary
+        run: mdbook-mermaid --version
+      - name: Test mdbook-toc binary
+        run: mdbook-toc --version
+      - name: Test mdbook-open-on-gh binary
+        run: mdbook-open-on-gh --version
       - name: Add Change and commit
         uses: EndBug/add-and-commit@v7.2.1
         with:
