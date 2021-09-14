@@ -59,6 +59,14 @@ describe("Repo", () => {
     expect(() => new Repo("owner/")).toThrowError("Projekt name not defined");
   });
 
+  it("should print repo as string", () => {
+    spyGetInput.mockReturnValue("token");
+    const repoName = "owner/project";
+    const repo = new Repo(repoName);
+    expect(`${repo}`).toBe(repoName);
+    expect(repo.toString()).toBe(repoName);
+  });
+
   it("should request all releases", async () => {
     mockListReleases.mockResolvedValue({ status: 200, data: "data" });
     spyGetInput.mockReturnValue("token");
@@ -73,6 +81,7 @@ describe("Repo", () => {
   });
 
   it("should throw error if request to all releases returns non 200 status code", async () => {
+    expect.assertions(3);
     mockListReleases.mockResolvedValue({ status: 500, data: "data" });
     spyGetInput.mockReturnValue("token");
     const r = new Repo("owner/repo");
@@ -102,6 +111,7 @@ describe("Repo", () => {
   });
 
   it("should throw error if request to latest release returns non 200 status code", async () => {
+    expect.assertions(3);
     mockGetLatestRelease.mockResolvedValue({ status: 500, data: "data" });
     spyGetInput.mockReturnValue("token");
     const r = new Repo("owner/repo");
@@ -133,6 +143,7 @@ describe("Repo", () => {
   });
 
   it("should throw error if request to all release by tag returns non 200 status code", async () => {
+    expect.assertions(3);
     mockGetReleaseByTag.mockResolvedValue({ status: 500, data: "data" });
     const tag = "v2.1";
     spyGetInput.mockReturnValue("token");

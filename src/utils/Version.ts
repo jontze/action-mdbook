@@ -1,4 +1,4 @@
-import semver from "semver";
+import { maxSatisfying } from "semver";
 
 export class Version {
   public wanted: string;
@@ -8,7 +8,7 @@ export class Version {
   }
 
   findMaxStatisfyingVersion(versions: string[]): string {
-    const maxVersion = semver.maxSatisfying(versions, this.wanted);
+    const maxVersion = maxSatisfying(versions, this.wanted);
     if (maxVersion == null) {
       throw new Error(
         `No statisfying version found for your input of '${this.wanted}'`
