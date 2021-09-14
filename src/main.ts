@@ -1,6 +1,7 @@
 import * as core from "@actions/core";
 import { MdBook } from "./mdbook/MdBook";
 import { Linkcheck } from "./mdbook/plugins/Linkcheck";
+import { Mermaid } from "./mdbook/plugins/Mermaid";
 
 /**
  * Run the action async
@@ -13,6 +14,12 @@ const run = async () => {
   if (core.getBooleanInput("use-linkcheck") === true) {
     const linkcheckPlugin = new Linkcheck();
     await linkcheckPlugin.setup();
+  }
+
+  // Mermaid - 3rd party preprocessor plugin for mdbook
+  if (core.getBooleanInput("use-mermaid") === true) {
+    const mermaidPlugin = new Mermaid();
+    await mermaidPlugin.setup();
   }
 };
 

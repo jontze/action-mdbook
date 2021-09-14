@@ -17,6 +17,14 @@ inputs:
     description: "linkcheck version that should be used (e.g. v0.2.2 or 0.2.2)"
     required: false,
     default: "latest"
+  use-mermaid:
+    description: "Use mermaid plugin (true / false)"
+    required: false
+    default: false
+  mermaid-version:
+    description: mermaid version that should be used
+    required: false
+    default: "latest"
 runs:
   using: "node12"
   main: "./dist/index.js"
