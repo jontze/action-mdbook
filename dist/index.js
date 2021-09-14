@@ -67,25 +67,6 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -95,69 +76,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.MdBook = void 0;
-const core = __importStar(__nccwpck_require__(2186));
-const tc = __importStar(__nccwpck_require__(7784));
-const os_1 = __importDefault(__nccwpck_require__(2087));
+const core_1 = __nccwpck_require__(2186);
+const os_1 = __nccwpck_require__(2087);
+const Installer_1 = __nccwpck_require__(5750);
+const Loader_1 = __nccwpck_require__(2581);
 const Repo_1 = __nccwpck_require__(7476);
 const Version_1 = __nccwpck_require__(9518);
 class MdBook {
     constructor() {
-        this.version = new Version_1.Version(core.getInput("mdbook-version"));
+        this.version = new Version_1.Version((0, core_1.getInput)("mdbook-version"));
         this.repo = new Repo_1.Repo("rust-lang/mdBook");
-        this.platform = os_1.default.platform();
+        this.platform = (0, os_1.platform)();
+        this.loader = new Loader_1.Loader(this.repo, this.version, "unknown-linux-gnu");
         this.validateOs();
     }
     validateOs() {
         if (this.platform !== "linux") {
-            throw new Error(`Unsupported operating system '${this.platform}. This action supports only linux.'`);
+            throw new Error(`Unsupported operating system '${this.platform}'. This action supports only linux.`);
         }
-    }
-    getDownloadUrl() {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (this.version.wanted === "latest") {
-                const downloadUrl = (yield this.repo.getLatestRelease()).assets.find((asset) => asset.browser_download_url.includes("unknown-linux-gnu"));
-                if (downloadUrl == null) {
-                    throw new Error("Download url not found!");
-                }
-                return downloadUrl.browser_download_url;
-            }
-            else {
-                const releases = yield this.repo.getReleases();
-                const versions = [];
-                releases.forEach((release) => {
-                    if (release.prerelease === false) {
-                        versions.push(release.tag_name);
-                    }
-                });
-                const choosedVersion = this.version.findMaxStatisfyingVersion(versions);
-                core.info(`Latest statisfying version is: ${choosedVersion}`);
-                const downloadUrl = (yield this.repo.getReleaseByTag(choosedVersion)).assets.find((asset) => asset.browser_download_url.includes("unknown-linux-gnu"));
-                if (downloadUrl == null) {
-                    throw new Error("Download url not found!");
-                }
-                return downloadUrl.browser_download_url;
-            }
-        });
-    }
-    install(url) {
-        return __awaiter(this, void 0, void 0, function* () {
-            core.info(`Download mdBook binary from ${url}`);
-            const downloadPath = yield tc.downloadTool(url);
-            const binPath = yield tc.extractTar(downloadPath);
-            core.addPath(binPath);
-            core.info("MdBook extracted and added to path");
-        });
     }
     setup() {
         return __awaiter(this, void 0, void 0, function* () {
-            core.info(`Setup mdBook ${this.version.wanted}...`);
-            const url = yield this.getDownloadUrl();
-            yield this.install(url);
+            (0, core_1.info)(`Setup mdBook ${this.version.wanted}...`);
+            const archivePath = yield this.loader.downloadBinary();
+            const installer = new Installer_1.Installer(archivePath, "mdbook", this.loader.archiveType);
+            yield installer.install();
         });
     }
 }
@@ -167,29 +112,28 @@ exports.MdBook = MdBook;
 /***/ }),
 
 /***/ 7079:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Linkcheck = void 0;
+const MdPlugin_1 = __nccwpck_require__(5709);
+class Linkcheck extends MdPlugin_1.MdPlugin {
+    constructor() {
+        super("Michael-F-Bryan/mdbook-linkcheck", "linkcheck-version", "mdbook-linkcheck", "unknown-linux-gnu");
+    }
+}
+exports.Linkcheck = Linkcheck;
+
+
+/***/ }),
+
+/***/ 5709:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -199,111 +143,237 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Linkcheck = void 0;
-const os_1 = __importDefault(__nccwpck_require__(2087));
-const core = __importStar(__nccwpck_require__(2186));
-const tc = __importStar(__nccwpck_require__(7784));
-const exec = __importStar(__nccwpck_require__(1514));
+exports.MdPlugin = void 0;
+const os_1 = __nccwpck_require__(2087);
+const core_1 = __nccwpck_require__(2186);
+const Loader_1 = __nccwpck_require__(2581);
 const Repo_1 = __nccwpck_require__(7476);
 const Version_1 = __nccwpck_require__(9518);
-class Linkcheck {
-    constructor() {
-        this.version = new Version_1.Version(core.getInput("linkcheck-version"));
-        this.repo = new Repo_1.Repo("Michael-F-Bryan/mdbook-linkcheck");
-        this.platform = os_1.default.platform();
+const Installer_1 = __nccwpck_require__(5750);
+class MdPlugin {
+    constructor(repoName, versionKey, binaryName, binaryPlatformName) {
+        this.repoName = repoName;
+        this.versionKey = versionKey;
+        this.binaryName = binaryName;
+        this.binaryPlatformName = binaryPlatformName;
+        this.version = new Version_1.Version((0, core_1.getInput)(this.versionKey));
+        this.repo = new Repo_1.Repo(this.repoName);
+        this.platform = (0, os_1.platform)();
+        this.loader = new Loader_1.Loader(this.repo, this.version, this.binaryPlatformName);
         this.validateOs();
     }
     validateOs() {
         if (this.platform !== "linux") {
-            throw new Error(`Unsupported operating system '${this.platform}. This action supports only linux.'`);
+            throw new Error(`Unsupported operating system '${this.platform}'. This plugin supports only linux.`);
         }
-    }
-    getDownloadUrl() {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (this.version.wanted === "latest") {
-                // Download latest release
-                let downloadUrl = (yield this.repo.getLatestRelease()).assets.find((asset) => asset.browser_download_url.includes("unknown-linux-gnu"));
-                if (downloadUrl == null) {
-                    // Fetch all releases and use the latest release with a matching binary
-                    core.warning("The latest release doesn't include a valid binary...");
-                    core.warning("Searching for older release...");
-                    let version = null;
-                    const releases = yield this.repo.getReleases();
-                    releases.forEach((release) => {
-                        if (version == null &&
-                            release.prerelease === false &&
-                            release.assets.length !== 0 &&
-                            release.assets.find((asset) => asset.browser_download_url.includes("unknown-linux-gnu"))) {
-                            version = release.tag_name;
-                        }
-                    });
-                    if (version == null) {
-                        throw new Error("No release found with a matching linux binary");
-                    }
-                    core.info(`Latest version with a valid release binary is: ${version}`);
-                    downloadUrl = (yield this.repo.getReleaseByTag(version)).assets.find((asset) => asset.browser_download_url.includes("unknown-linux-gnu"));
-                    if (downloadUrl == null) {
-                        throw new Error("Download url not found!");
-                    }
-                }
-                return downloadUrl.browser_download_url;
-            }
-            else {
-                // Download statisfying version release with a binary
-                const releases = yield this.repo.getReleases();
-                const versions = [];
-                releases.forEach((release) => {
-                    if (release.prerelease === false &&
-                        release.assets.length !== 0 &&
-                        release.assets.find((asset) => asset.browser_download_url.includes("unknown-linux-gnu"))) {
-                        versions.push(release.tag_name);
-                    }
-                });
-                const choosedVersion = this.version.findMaxStatisfyingVersion(versions);
-                core.info(`Latest statisfying version is: ${choosedVersion}`);
-                const downloadUrl = (yield this.repo.getReleaseByTag(choosedVersion)).assets.find((asset) => asset.browser_download_url.includes("unknown-linux-gnu"));
-                if (downloadUrl == null) {
-                    throw new Error("Download url not found!");
-                }
-                return downloadUrl.browser_download_url;
-            }
-        });
-    }
-    install(url) {
-        return __awaiter(this, void 0, void 0, function* () {
-            core.info(`Download linkcheck binary from ${url}`);
-            const downloadPath = yield tc.downloadTool(url);
-            let binPath;
-            if (url.endsWith(".zip")) {
-                binPath = yield tc.extractZip(downloadPath);
-            }
-            else {
-                binPath = yield tc.extractTar(downloadPath);
-            }
-            const exitCode = yield exec.exec("chmod", [
-                "+x",
-                `${binPath}/mdbook-linkcheck`,
-            ]);
-            if (exitCode !== 0) {
-                throw new Error(`Could not convert mdbook-linkcheck binary to executable, failed with exit code ${exitCode}`);
-            }
-            core.addPath(binPath);
-            core.info("mdbook-linkcheck extracted and added to path");
-        });
     }
     setup() {
         return __awaiter(this, void 0, void 0, function* () {
-            core.info(`Setup mdbook-linkcheck ${this.version.wanted}...`);
-            const url = yield this.getDownloadUrl();
-            yield this.install(url);
+            (0, core_1.info)("---------------------------");
+            (0, core_1.info)(`[PLUGIN]: Setup ${this.repo} ${this.version.wanted}...`);
+            const archivePath = yield this.loader.downloadBinary();
+            const installer = new Installer_1.Installer(archivePath, this.binaryName, this.loader.archiveType);
+            yield installer.install();
         });
     }
 }
-exports.Linkcheck = Linkcheck;
+exports.MdPlugin = MdPlugin;
+
+
+/***/ }),
+
+/***/ 1035:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ARCHIVE_TYPE = void 0;
+var ARCHIVE_TYPE;
+(function (ARCHIVE_TYPE) {
+    ARCHIVE_TYPE[ARCHIVE_TYPE["ZIP"] = 0] = "ZIP";
+    ARCHIVE_TYPE[ARCHIVE_TYPE["TAR"] = 1] = "TAR";
+    ARCHIVE_TYPE[ARCHIVE_TYPE["XAR"] = 2] = "XAR";
+    ARCHIVE_TYPE[ARCHIVE_TYPE["SEVENZ"] = 3] = "SEVENZ";
+})(ARCHIVE_TYPE = exports.ARCHIVE_TYPE || (exports.ARCHIVE_TYPE = {}));
+
+
+/***/ }),
+
+/***/ 5750:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Installer = void 0;
+const core_1 = __nccwpck_require__(2186);
+const tool_cache_1 = __nccwpck_require__(7784);
+const fs_1 = __nccwpck_require__(5747);
+const typings_1 = __nccwpck_require__(1035);
+class Installer {
+    constructor(downloadPath, binaryName, archiveType) {
+        this.downloadPath = downloadPath;
+        this.binaryName = binaryName;
+        this.archiveType = archiveType;
+    }
+    extractArchive() {
+        return __awaiter(this, void 0, void 0, function* () {
+            switch (this.archiveType) {
+                case typings_1.ARCHIVE_TYPE.TAR:
+                    return (0, tool_cache_1.extractTar)(this.downloadPath);
+                case typings_1.ARCHIVE_TYPE.ZIP:
+                    return (0, tool_cache_1.extractZip)(this.downloadPath);
+                case typings_1.ARCHIVE_TYPE.SEVENZ:
+                    return (0, tool_cache_1.extract7z)(this.downloadPath);
+                case typings_1.ARCHIVE_TYPE.XAR:
+                    return (0, tool_cache_1.extractXar)(this.downloadPath);
+                default:
+                    throw new Error(`Unkown archive type '${this.archiveType}'`);
+            }
+        });
+    }
+    install() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const extractedPath = yield this.extractArchive();
+            const binaryPath = `${extractedPath}/${this.binaryName}`;
+            try {
+                (0, fs_1.accessSync)(binaryPath, fs_1.constants.X_OK);
+            }
+            catch (err) {
+                (0, core_1.info)("File not executable! Changing permissions...");
+                (0, fs_1.chmodSync)(binaryPath, 0o100);
+            }
+            (0, core_1.addPath)(extractedPath);
+            (0, core_1.info)(`${this.binaryName} extracted and added to path`);
+        });
+    }
+}
+exports.Installer = Installer;
+
+
+/***/ }),
+
+/***/ 2581:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Loader = void 0;
+const core_1 = __nccwpck_require__(2186);
+const tool_cache_1 = __nccwpck_require__(7784);
+const path_1 = __nccwpck_require__(5622);
+const typings_1 = __nccwpck_require__(1035);
+class Loader {
+    constructor(repo, version, binaryPlatformString) {
+        this.repo = repo;
+        this.version = version;
+        this.binaryPlatformString = binaryPlatformString;
+    }
+    downloadBinary() {
+        return __awaiter(this, void 0, void 0, function* () {
+            let downloadUrl;
+            if (this.version.wanted === "latest") {
+                // Download latest release
+                downloadUrl = yield this.getLatestDownloadUrl();
+            }
+            else {
+                // Download statisfying version release with a binary
+                downloadUrl = yield this.getDownloadUrlByRelease();
+            }
+            this.archiveType = this.extractArchiveType(downloadUrl);
+            (0, core_1.info)(`Download ${this.repo} binary from ${downloadUrl}`);
+            return (0, tool_cache_1.downloadTool)(downloadUrl);
+        });
+    }
+    extractArchiveType(fileName) {
+        const fileType = (0, path_1.extname)(fileName);
+        switch (fileType) {
+            case ".zip":
+                return typings_1.ARCHIVE_TYPE.ZIP;
+            case ".7z":
+                return typings_1.ARCHIVE_TYPE.SEVENZ;
+            case ".xar":
+                return typings_1.ARCHIVE_TYPE.XAR;
+            case ".tar":
+            case ".gz":
+                return typings_1.ARCHIVE_TYPE.TAR;
+            default:
+                throw new Error("Unsupported archive type");
+        }
+    }
+    getLatestDownloadUrl() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const downloadUrl = (yield this.repo.getLatestRelease()).assets.find((asset) => asset.browser_download_url.includes(this.binaryPlatformString));
+            if (downloadUrl == null) {
+                // Fetch all releases and use the latest release with a matching binary
+                (0, core_1.warning)("The latest release doesn't include a valid binary...");
+                (0, core_1.warning)("Searching for older release...");
+                let version = null;
+                const releases = yield this.repo.getReleases();
+                releases.forEach((release) => {
+                    if (version == null &&
+                        release.prerelease === false &&
+                        release.assets.length !== 0 &&
+                        release.assets.find((asset) => asset.browser_download_url.includes(this.binaryPlatformString))) {
+                        version = release.tag_name;
+                    }
+                });
+                if (version == null) {
+                    throw new Error("No release found with a matching linux binary");
+                }
+                (0, core_1.info)(`Latest version with a valid release binary is: ${version}`);
+                const downloadUrlLatestValidRelease = (yield this.repo.getReleaseByTag(version)).assets.find((asset) => asset.browser_download_url.includes(this.binaryPlatformString));
+                if (downloadUrlLatestValidRelease == null) {
+                    throw new Error("Download url not found!");
+                }
+                return downloadUrlLatestValidRelease.browser_download_url;
+            }
+            return downloadUrl.browser_download_url;
+        });
+    }
+    getDownloadUrlByRelease() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const releases = yield this.repo.getReleases();
+            const versions = [];
+            releases.forEach((release) => {
+                if (release.prerelease === false &&
+                    release.assets.length !== 0 &&
+                    release.assets.find((asset) => asset.browser_download_url.includes(this.binaryPlatformString))) {
+                    versions.push(release.tag_name);
+                }
+            });
+            const choosedVersion = this.version.findMaxStatisfyingVersion(versions);
+            (0, core_1.info)(`Latest statisfying version is: ${choosedVersion}`);
+            const downloadUrl = (yield this.repo.getReleaseByTag(choosedVersion)).assets.find((asset) => asset.browser_download_url.includes(this.binaryPlatformString));
+            if (downloadUrl == null) {
+                throw new Error("Download url not found!");
+            }
+            return downloadUrl.browser_download_url;
+        });
+    }
+}
+exports.Loader = Loader;
 
 
 /***/ }),
@@ -313,25 +383,6 @@ exports.Linkcheck = Linkcheck;
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -343,8 +394,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Repo = void 0;
-const github = __importStar(__nccwpck_require__(5438));
-const core = __importStar(__nccwpck_require__(2186));
+const github_1 = __nccwpck_require__(5438);
+const core_1 = __nccwpck_require__(2186);
 class Repo {
     constructor(repository) {
         [this.owner, this.project] = repository.split("/");
@@ -354,11 +405,14 @@ class Repo {
         if (this.project == null || this.project === "") {
             throw new Error("Projekt name not defined");
         }
-        this.token = core.getInput("token");
+        this.token = (0, core_1.getInput)("token");
         if (this.token == null || this.token === "") {
             throw new Error("GitHub token not found");
         }
-        this.octokit = github.getOctokit(this.token);
+        this.octokit = (0, github_1.getOctokit)(this.token);
+    }
+    toString() {
+        return `${this.owner}/${this.project}`;
     }
     getReleases() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -404,22 +458,19 @@ exports.Repo = Repo;
 /***/ }),
 
 /***/ 9518:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Version = void 0;
-const semver_1 = __importDefault(__nccwpck_require__(1383));
+const semver_1 = __nccwpck_require__(1383);
 class Version {
     constructor(version) {
         this.wanted = version.replace("v", "");
     }
     findMaxStatisfyingVersion(versions) {
-        const maxVersion = semver_1.default.maxSatisfying(versions, this.wanted);
+        const maxVersion = (0, semver_1.maxSatisfying)(versions, this.wanted);
         if (maxVersion == null) {
             throw new Error(`No statisfying version found for your input of '${this.wanted}'`);
         }

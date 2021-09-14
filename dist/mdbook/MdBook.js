@@ -1,23 +1,4 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -27,69 +8,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MdBook = void 0;
-const core = __importStar(require("@actions/core"));
-const tc = __importStar(require("@actions/tool-cache"));
-const os_1 = __importDefault(require("os"));
+const core_1 = require("@actions/core");
+const os_1 = require("os");
+const Installer_1 = require("../utils/Installer");
+const Loader_1 = require("../utils/Loader");
 const Repo_1 = require("../utils/Repo");
 const Version_1 = require("../utils/Version");
 class MdBook {
     constructor() {
-        this.version = new Version_1.Version(core.getInput("mdbook-version"));
+        this.version = new Version_1.Version((0, core_1.getInput)("mdbook-version"));
         this.repo = new Repo_1.Repo("rust-lang/mdBook");
-        this.platform = os_1.default.platform();
+        this.platform = (0, os_1.platform)();
+        this.loader = new Loader_1.Loader(this.repo, this.version, "unknown-linux-gnu");
         this.validateOs();
     }
     validateOs() {
         if (this.platform !== "linux") {
-            throw new Error(`Unsupported operating system '${this.platform}. This action supports only linux.'`);
+            throw new Error(`Unsupported operating system '${this.platform}'. This action supports only linux.`);
         }
-    }
-    getDownloadUrl() {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (this.version.wanted === "latest") {
-                const downloadUrl = (yield this.repo.getLatestRelease()).assets.find((asset) => asset.browser_download_url.includes("unknown-linux-gnu"));
-                if (downloadUrl == null) {
-                    throw new Error("Download url not found!");
-                }
-                return downloadUrl.browser_download_url;
-            }
-            else {
-                const releases = yield this.repo.getReleases();
-                const versions = [];
-                releases.forEach((release) => {
-                    if (release.prerelease === false) {
-                        versions.push(release.tag_name);
-                    }
-                });
-                const choosedVersion = this.version.findMaxStatisfyingVersion(versions);
-                core.info(`Latest statisfying version is: ${choosedVersion}`);
-                const downloadUrl = (yield this.repo.getReleaseByTag(choosedVersion)).assets.find((asset) => asset.browser_download_url.includes("unknown-linux-gnu"));
-                if (downloadUrl == null) {
-                    throw new Error("Download url not found!");
-                }
-                return downloadUrl.browser_download_url;
-            }
-        });
-    }
-    install(url) {
-        return __awaiter(this, void 0, void 0, function* () {
-            core.info(`Download mdBook binary from ${url}`);
-            const downloadPath = yield tc.downloadTool(url);
-            const binPath = yield tc.extractTar(downloadPath);
-            core.addPath(binPath);
-            core.info("MdBook extracted and added to path");
-        });
     }
     setup() {
         return __awaiter(this, void 0, void 0, function* () {
-            core.info(`Setup mdBook ${this.version.wanted}...`);
-            const url = yield this.getDownloadUrl();
-            yield this.install(url);
+            (0, core_1.info)(`Setup mdBook ${this.version.wanted}...`);
+            const archivePath = yield this.loader.downloadBinary();
+            const installer = new Installer_1.Installer(archivePath, "mdbook", this.loader.archiveType);
+            yield installer.install();
         });
     }
 }
