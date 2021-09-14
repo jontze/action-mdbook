@@ -1,3 +1,13 @@
+# [1.1.0](https://github.com/UsingPython/action-mdbook/compare/v1.0.2...v1.1.0) (2021-09-14)
+
+
+### Features
+
+* Add mdbook-mermaid preprocessor to supported action plugins ([1fc3b66](https://github.com/UsingPython/action-mdbook/commit/1fc3b66c7d53be5539b6436fe2c1dcfdc6dfe6a0))
+* Add support of mdbook-open-on-gh plugin ([d538a3e](https://github.com/UsingPython/action-mdbook/commit/d538a3e4fd09d75de61605590ed6eda19ea3990e))
+* Add support of mdbook-toc plugin ([6121751](https://github.com/UsingPython/action-mdbook/commit/6121751fe9422f37f0aa715c5882dccfe271a368))
+* Enable toc and open-on-gh plugins ([c316e6c](https://github.com/UsingPython/action-mdbook/commit/c316e6cc7fb28c83ea3718f8c222c26848a358c6))
+
 ## [1.0.2](https://github.com/UsingPython/action-mdbook/compare/v1.0.1...v1.0.2) (2021-09-08)
 
 
