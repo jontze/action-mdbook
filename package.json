@@ -10,10 +10,10 @@
     "test": "jest",
     "semantic-release": "semantic-release"
   },
-  "author": "UsingPython",
+  "author": "Jontze",
   "repository": {
     "type": "git",
-    "url": "https://github.com/UsingPython/action-mdbook"
+    "url": "https://github.com/jontze/action-mdbook"
   },
   "license": "MIT",
   "dependencies": {
