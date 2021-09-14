@@ -68,6 +68,9 @@ jobs:
         with:
           token: ${{secrets.GITHUB_TOKEN}}
           use-linkcheck: true
+          use-mermaid: true
+          use-toc: true
+          use-opengh: true
       - name: Test mdBook binary
         run: mdbook --version
       - name: Test mdbook-linkcheck binary
