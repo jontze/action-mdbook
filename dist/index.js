@@ -38,6 +38,9 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
 const MdBook_1 = __nccwpck_require__(7174);
 const Linkcheck_1 = __nccwpck_require__(7079);
+const Mermaid_1 = __nccwpck_require__(8883);
+const OpenGh_1 = __nccwpck_require__(7058);
+const Toc_1 = __nccwpck_require__(3853);
 /**
  * Run the action async
  */
@@ -48,6 +51,21 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
     if (core.getBooleanInput("use-linkcheck") === true) {
         const linkcheckPlugin = new Linkcheck_1.Linkcheck();
         yield linkcheckPlugin.setup();
+    }
+    // Mermaid - 3rd party preprocessor plugin for mdbook
+    if (core.getBooleanInput("use-mermaid") === true) {
+        const mermaidPlugin = new Mermaid_1.Mermaid();
+        yield mermaidPlugin.setup();
+    }
+    // Toc - 3rd party preprocessor plugin for mdbook
+    if (core.getBooleanInput("use-toc") === true) {
+        const tocPlugin = new Toc_1.Toc();
+        yield tocPlugin.setup();
+    }
+    // Open-On-Gh - 3rd party preprocessor plugin for mdbook
+    if (core.getBooleanInput("use-opengh") === true) {
+        const openGhPlugin = new OpenGh_1.OpenGh();
+        yield openGhPlugin.setup();
     }
 });
 (() => __awaiter(void 0, void 0, void 0, function* () {
@@ -179,6 +197,60 @@ class MdPlugin {
     }
 }
 exports.MdPlugin = MdPlugin;
+
+
+/***/ }),
+
+/***/ 8883:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Mermaid = void 0;
+const MdPlugin_1 = __nccwpck_require__(5709);
+class Mermaid extends MdPlugin_1.MdPlugin {
+    constructor() {
+        super("badboy/mdbook-mermaid", "mermaid-version", "mdbook-mermaid", "unknown-linux-gnu");
+    }
+}
+exports.Mermaid = Mermaid;
+
+
+/***/ }),
+
+/***/ 7058:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.OpenGh = void 0;
+const MdPlugin_1 = __nccwpck_require__(5709);
+class OpenGh extends MdPlugin_1.MdPlugin {
+    constructor() {
+        super("badboy/mdbook-open-on-gh", "opengh-version", "mdbook-open-on-gh", "unknown-linux-gnu");
+    }
+}
+exports.OpenGh = OpenGh;
+
+
+/***/ }),
+
+/***/ 3853:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Toc = void 0;
+const MdPlugin_1 = __nccwpck_require__(5709);
+class Toc extends MdPlugin_1.MdPlugin {
+    constructor() {
+        super("badboy/mdbook-toc", "toc-version", "mdbook-toc", "unknown-linux-gnu");
+    }
+}
+exports.Toc = Toc;
 
 
 /***/ }),

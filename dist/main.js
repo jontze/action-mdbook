@@ -31,6 +31,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(require("@actions/core"));
 const MdBook_1 = require("./mdbook/MdBook");
 const Linkcheck_1 = require("./mdbook/plugins/Linkcheck");
+const Mermaid_1 = require("./mdbook/plugins/Mermaid");
+const OpenGh_1 = require("./mdbook/plugins/OpenGh");
+const Toc_1 = require("./mdbook/plugins/Toc");
 /**
  * Run the action async
  */
@@ -41,6 +44,21 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
     if (core.getBooleanInput("use-linkcheck") === true) {
         const linkcheckPlugin = new Linkcheck_1.Linkcheck();
         yield linkcheckPlugin.setup();
+    }
+    // Mermaid - 3rd party preprocessor plugin for mdbook
+    if (core.getBooleanInput("use-mermaid") === true) {
+        const mermaidPlugin = new Mermaid_1.Mermaid();
+        yield mermaidPlugin.setup();
+    }
+    // Toc - 3rd party preprocessor plugin for mdbook
+    if (core.getBooleanInput("use-toc") === true) {
+        const tocPlugin = new Toc_1.Toc();
+        yield tocPlugin.setup();
+    }
+    // Open-On-Gh - 3rd party preprocessor plugin for mdbook
+    if (core.getBooleanInput("use-opengh") === true) {
+        const openGhPlugin = new OpenGh_1.OpenGh();
+        yield openGhPlugin.setup();
     }
 });
 (() => __awaiter(void 0, void 0, void 0, function* () {
