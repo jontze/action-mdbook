@@ -25,6 +25,22 @@ inputs:
     description: mermaid version that should be used
     required: false
     default: "latest"
+  use-toc:
+    description: "Use toc plugin (true / false)"
+    required: false
+    default: false
+  toc-version:
+    description: toc version that should be used
+    required: false
+    default: "latest"
+  use-opengh:
+    description: "Use open-on-gh plugin (true / false)"
+    required: false
+    default: false
+  opengh-version:
+    description: open-on-gh version that should be used
+    required: false
+    default: "latest"
 runs:
   using: "node12"
   main: "./dist/index.js"
