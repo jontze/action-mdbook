@@ -8,6 +8,9 @@ on:
     branches:
       - master
       - develop
+    types:
+      - opened
+      - synchronize
 
 jobs:
   lint:
@@ -81,16 +84,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: git pull
       - name: Use Node.js 14.x
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
       - name: Install Packages
         run: yarn install --frozen-lockfile
-      - name: Build Step
-        env:
-          Test: ""
-        run: yarn build
       - name: Run Semantic Release
         run: yarn semantic-release
         env:
