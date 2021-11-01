@@ -24,7 +24,7 @@
     "semver": "^7.3.5"
   },
   "devDependencies": {
-    "@semantic-release/changelog": "^6.0.0",
+    "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
     "@types/jest": "^27.0.2",
     "@types/mock-fs": "^4.13.1",
