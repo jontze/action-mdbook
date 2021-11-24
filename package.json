@@ -28,7 +28,7 @@
     "@semantic-release/git": "^10.0.1",
     "@types/jest": "^27.0.3",
     "@types/mock-fs": "^4.13.1",
-    "@types/node": "^16.11.9",
+    "@types/node": "^16.11.10",
     "@types/semver": "^7.3.9",
     "@vercel/ncc": "^0.32.0",
     "jest": "^27.3.1",
