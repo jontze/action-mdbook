@@ -30,7 +30,7 @@
     "@types/mock-fs": "^4.13.1",
     "@types/node": "^16.11.11",
     "@types/semver": "^7.3.9",
-    "@vercel/ncc": "^0.32.0",
+    "@vercel/ncc": "^0.33.0",
     "jest": "^27.4.3",
     "mock-fs": "^5.1.2",
     "prettier": "^2.5.0",
