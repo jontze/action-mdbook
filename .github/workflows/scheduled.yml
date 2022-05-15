@@ -1,0 +1,64 @@
+---
+on:
+  schedule:
+    - cron: "0 8 * * MON"
+
+jobs:
+  mdBook:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download latest mdbook
+        uses: ./
+        with:
+          token: ${{secrets.GITHUB_TOKEN}}
+      - name: Test mdBook binary
+        run: mdbook --version || exit 1
+  linkcheck:
+    needs: [mdBook]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download latest linkcheck
+        uses: ./
+        with:
+          token: ${{secrets.GITHUB_TOKEN}}
+          use-linkcheck: true
+      - name: Test mdbook-linkcheck binary
+        run: mdbook-linkcheck --version || exit 1
+  mermaid:
+    needs: [mdBook]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download latest mermaid
+        uses: ./
+        with:
+          token: ${{secrets.GITHUB_TOKEN}}
+          use-mermaid: true
+      - name: Test mdbook-mermaid binary
+        run: mdbook-mermaid --version || exit 1
+  toc:
+    needs: [mdBook]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download latest toc
+        uses: ./
+        with:
+          token: ${{secrets.GITHUB_TOKEN}}
+          use-toc: true
+      - name: Test mdbook-toc binary
+        run: mdbook-toc --version || exit 1
+  open_on_gh:
+    needs: [mdBook]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download latest open-on-gh
+        uses: ./
+        with:
+          token: ${{secrets.GITHUB_TOKEN}}
+          use-opengh: true
+      - name: Test mdbook-open-on-gh binary
+        run: mdbook-open-on-gh --version || exit 1
