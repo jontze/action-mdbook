@@ -1,0 +1,23 @@
+name: Sonarcloud
+author: Jontze
+description: This action executes the sonarcloud scan
+inputs:
+  github_token:
+    description: Repo github token
+    required: true
+  sonar_token:
+    description: Sonarcloud token
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Download lcov
+      uses: actions/download-artifact@v2
+      with:
+        name: lcov.info
+        path: coverage/
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ inputs.github_token }}
+        SONAR_TOKEN: ${{ inputs.sonar_token }}

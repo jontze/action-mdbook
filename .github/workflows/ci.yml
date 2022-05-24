@@ -3,14 +3,6 @@ on:
   push:
     branches:
       - master
-      - develop
-  pull_request:
-    branches:
-      - master
-      - develop
-    types:
-      - opened
-      - synchronize
 
 jobs:
   lint:
@@ -18,15 +10,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        uses: ./.github/actions/setup
       - name: Check lint
         run: yarn lint
+
   unittests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
+      - name: Setup Node and Dependencies
+        uses: ./.github/actions/setup
       - name: Run unittests
         run: yarn test
       - name: Save coverage
@@ -34,44 +27,31 @@ jobs:
         with:
           name: lcov.info
           path: coverage/lcov.info
+
   sonarcloud:
     needs: [unittests]
-    if: github.actor != 'dependabot[bot]'
     name: SonarCloud
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Download lcov
-        uses: actions/download-artifact@v2
+      - name: Execute sonar action
+        uses: ./.github/actions/sonar_scan
         with:
-          name: lcov.info
-          path: coverage/
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  build_test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-      - name: Build
-        run: yarn build
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          sonar_token: ${{ secrets.SONAR_TOKEN }}
+
   build:
-    needs: [lint, sonarcloud, build_test]
-    if: github.ref == 'refs/heads/master'
+    needs: [lint, sonarcloud]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
+      - name: Setup Node and Dependencies
+        uses: ./.github/actions/setup
       - name: Build
         run: yarn build
-      - name: Run local action wit latest tags
+      - name: Run local action with latest tags
         uses: ./
         with:
           token: ${{secrets.GITHUB_TOKEN}}
@@ -95,9 +75,9 @@ jobs:
           add: "./dist --force"
           default_author: github_actions
           message: "chore: Generate dist files [skip ci]"
+
   release:
     needs: [build]
-    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -106,8 +86,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - name: Install Packages
-        run: yarn install --frozen-lockfile
+      - name: Setup Node and Dependencies
+        uses: ./.github/actions/setup
       - name: Run Semantic Release
         run: yarn semantic-release
         env:

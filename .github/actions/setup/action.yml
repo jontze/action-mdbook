@@ -1,0 +1,14 @@
+name: Setup Node and Yarn Install
+author: Jontze
+description: This setup node and installs all dependencies
+runs:
+  using: composite
+  steps:
+    - name: Setup Node Version
+      uses: actions/setup-node@v3
+      with:
+        node-version-file: ".nvmrc"
+        cache: "yarn"
+    - name: Install dependencies
+      shell: bash
+      run: yarn install --frozen-lockfile --prefer-offline

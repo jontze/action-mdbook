@@ -15,6 +15,7 @@ jobs:
           token: ${{secrets.GITHUB_TOKEN}}
       - name: Test mdBook binary
         run: mdbook --version || exit 1
+
   linkcheck:
     needs: [mdBook]
     runs-on: ubuntu-latest
@@ -27,6 +28,7 @@ jobs:
           use-linkcheck: true
       - name: Test mdbook-linkcheck binary
         run: mdbook-linkcheck --version || exit 1
+
   mermaid:
     needs: [mdBook]
     runs-on: ubuntu-latest
@@ -39,6 +41,7 @@ jobs:
           use-mermaid: true
       - name: Test mdbook-mermaid binary
         run: mdbook-mermaid --version || exit 1
+
   toc:
     needs: [mdBook]
     runs-on: ubuntu-latest
@@ -51,6 +54,7 @@ jobs:
           use-toc: true
       - name: Test mdbook-toc binary
         run: mdbook-toc --version || exit 1
+
   open_on_gh:
     needs: [mdBook]
     runs-on: ubuntu-latest
