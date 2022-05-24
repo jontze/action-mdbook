@@ -1,6 +1,6 @@
 {
   "name": "action-mdbook",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Github action to setup mdbook and optional the mdbook-linkcheck plugin ",
   "main": "dist/index.js",
   "scripts": {
