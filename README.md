@@ -1,5 +1,8 @@
 # MdBook Github Action with Plugin Support
 
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=UsingPython_action-mdbook&metric=coverage)](https://sonarcloud.io/summary/new_code?id=UsingPython_action-mdbook) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=UsingPython_action-mdbook&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=UsingPython_action-mdbook) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=UsingPython_action-mdbook&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=UsingPython_action-mdbook) [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=UsingPython_action-mdbook&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=UsingPython_action-mdbook)
+[![GitHub license](https://img.shields.io/github/license/jontze/action-mdbook)](https://github.com/jontze/action-mdbook/blob/master/LICENSE) [![GitHub issues](https://img.shields.io/github/issues/jontze/action-mdbook)](https://github.com/jontze/action-mdbook/issues)
+
 ## Introduction
 
 This is an action to set up the [rust-lang/mdBook](https://github.com/rust-lang/mdBook) with some [supported plugins](#supported-plugins).
