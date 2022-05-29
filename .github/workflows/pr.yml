@@ -6,47 +6,19 @@ on:
       - develop
     types:
       - opened
+      - edited
       - synchronize
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup Node and Dependencies
-        uses: ./.github/actions/setup
-      - name: Check lint
-        run: yarn lint
-
-  unittests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup Node and Dependencies
-        uses: ./.github/actions/setup
-      - name: Run unittests
-        run: yarn test
-      - name: Save coverage
-        uses: actions/upload-artifact@v2
-        with:
-          name: lcov.info
-          path: coverage/lcov.info
-
-  sonarcloud:
-    needs: [unittests]
-    runs-on: ubuntu-latest
-    if: github.actor != 'dependabot[bot]'
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Execute sonar action
-        uses: ./.github/actions/sonar_scan
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          sonar_token: ${{ secrets.SONAR_TOKEN }}
+  test_pr:
+    name: Test PR
+    uses: ./.github/workflows/test.yml
+    secrets: inherit
 
   build_test:
+    name: Building
+    needs:
+      - test_pr
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
