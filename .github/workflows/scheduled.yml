@@ -7,8 +7,16 @@ on:
 jobs:
   mdBook:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [12, 14, 16]
+    name: MdBook (Node ${{matrix.version}})
     steps:
       - uses: actions/checkout@v2
+      - name: Setup matrix node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.version }}
       - name: Download latest mdbook
         uses: ./
         with:
@@ -19,8 +27,16 @@ jobs:
   linkcheck:
     needs: [mdBook]
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [12, 14, 16]
+    name: Mdbook Linkcheck (Node ${{matrix.version}})
     steps:
       - uses: actions/checkout@v2
+      - name: Setup matrix node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.version }}
       - name: Download latest linkcheck
         uses: ./
         with:
@@ -32,8 +48,16 @@ jobs:
   mermaid:
     needs: [mdBook]
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [12, 14, 16]
+    name: Mdbook Mermaid (Node ${{matrix.version}})
     steps:
       - uses: actions/checkout@v2
+      - name: Setup matrix node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.version }}
       - name: Download latest mermaid
         uses: ./
         with:
@@ -45,8 +69,16 @@ jobs:
   toc:
     needs: [mdBook]
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [12, 14, 16]
+    name: Mdbook ToC (Node ${{matrix.version}})
     steps:
       - uses: actions/checkout@v2
+      - name: Setup matrix node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.version }}
       - name: Download latest toc
         uses: ./
         with:
@@ -58,8 +90,16 @@ jobs:
   open_on_gh:
     needs: [mdBook]
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [12, 14, 16]
+    name: Mdbook OpenOnGh (Node ${{matrix.version}})
     steps:
       - uses: actions/checkout@v2
+      - name: Setup matrix node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.version }}
       - name: Download latest open-on-gh
         uses: ./
         with:
