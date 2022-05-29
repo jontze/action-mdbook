@@ -51,6 +51,30 @@ jobs:
         uses: ./.github/actions/setup
       - name: Build
         run: yarn build
+      - name: Cache build output
+        uses: actions/cache@v3
+        with:
+          path: ./dist
+          key: build-cache-${{github.run_id}}-${{github.run_attempt}}
+
+  integration_test:
+    needs: [build]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [12, 14, 16]
+    name: Test action with Node v${{matrix.version}}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Restore build cache
+        id: build-restore
+        uses: actions/cache@v3
+        with:
+          path: ./dist
+          key: build-cache-${{github.run_id}}-${{github.run_attempt}}
+      - name: Ensure cache is restored
+        if: steps.build-restore.outputs.cache-hit != 'true'
+        run: exit 1
       - name: Run local action with latest tags
         uses: ./
         with:
@@ -69,23 +93,27 @@ jobs:
         run: mdbook-toc --version
       - name: Test mdbook-open-on-gh binary
         run: mdbook-open-on-gh --version
+
+  release:
+    needs: [integration_test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Restore build cache
+        id: build-restore
+        uses: actions/cache@v3
+        with:
+          path: ./dist
+          key: build-cache-${{github.run_id}}-${{github.run_attempt}}
+      - name: Ensure cache is restored
+        if: steps.build-restore.outputs.cache-hit != 'true'
+        run: exit 1
       - name: Add Change and commit
         uses: EndBug/add-and-commit@v7.2.1
         with:
           add: "./dist --force"
           default_author: github_actions
           message: "chore: Generate dist files [skip ci]"
-
-  release:
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - run: git pull
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
       - name: Setup Node and Dependencies
         uses: ./.github/actions/setup
       - name: Run Semantic Release
