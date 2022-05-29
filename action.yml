@@ -1,6 +1,6 @@
 name: mdBook Action with plugins
 description: A github action that installs mdBook and optional some popular mdbook plugins
-author: "UsingPython"
+author: "Jontze"
 inputs:
   token:
     description: "Github token"
@@ -15,7 +15,7 @@ inputs:
     default: false
   linkcheck-version:
     description: "linkcheck version that should be used (e.g. v0.2.2 or 0.2.2)"
-    required: false,
+    required: false
     default: "latest"
   use-mermaid:
     description: "Use mermaid plugin (true / false)"
