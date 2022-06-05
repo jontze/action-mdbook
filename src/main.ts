@@ -4,6 +4,7 @@ import { Linkcheck } from "./mdbook/plugins/Linkcheck";
 import { Mermaid } from "./mdbook/plugins/Mermaid";
 import { OpenGh } from "./mdbook/plugins/OpenGh";
 import { Toc } from "./mdbook/plugins/Toc";
+import { SVGbob } from "./mdbook/plugins/SVGbob";
 
 /**
  * Run the action async
@@ -35,6 +36,14 @@ const run = async () => {
     const openGhPlugin = new OpenGh();
     await openGhPlugin.setup();
   }
+
+  // SVGBob - converts line diagrams to svg
+  if (core.getBooleanInput("use-svgbob") === true) {
+    const SVGbobPlugin = new SVGbob();
+    await SVGbobPlugin.setup();
+  }
+
+
 };
 
 (async (): Promise<void> => {
