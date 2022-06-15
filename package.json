@@ -33,7 +33,7 @@
     "@vercel/ncc": "^0.34.0",
     "jest": "^27.5.1",
     "mock-fs": "^5.1.2",
-    "prettier": "^2.6.2",
+    "prettier": "^2.7.0",
     "semantic-release": "^19.0.3",
     "ts-jest": "^27.1.4",
     "ts-node": "^10.8.1",
