@@ -15,7 +15,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: MdBook (Node ${{ matrix.version }} - ${{ matrix.os }})
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Setup matrix node
         uses: actions/setup-node@v3
         with:
@@ -37,7 +37,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: Mdbook Linkcheck (Node ${{ matrix.version }} - ${{ matrix.os }})
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Setup matrix node
         uses: actions/setup-node@v3
         with:
@@ -60,7 +60,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: Mdbook Mermaid (Node ${{ matrix.version }} - ${{ matrix.os }})
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Setup matrix node
         uses: actions/setup-node@v3
         with:
@@ -83,7 +83,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: Mdbook ToC (Node ${{ matrix.version }} - ${{ matrix.os }})
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Setup matrix node
         uses: actions/setup-node@v3
         with:
@@ -106,7 +106,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: Mdbook OpenOnGh (Node ${{ matrix.version }} - ${{ matrix.os }})
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Setup matrix node
         uses: actions/setup-node@v3
         with:

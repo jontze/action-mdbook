@@ -30,7 +30,7 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: jontze/action-mdbook@v1
         with:
           token: ${{secrets.GITHUB_TOKEN}}
@@ -63,7 +63,7 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: jontze/action-mdbook@v1
         with:
           token: ${{secrets.GITHUB_TOKEN}}
