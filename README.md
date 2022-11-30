@@ -7,7 +7,7 @@
 
 This is an github action to set up the [rust-lang/mdBook](https://github.com/rust-lang/mdBook) with some [supported plugins](#supported-plugins).
 
-This action runs only on linux and is well tested on github **latest ubuntu** runner and **compatible with Node v12, v14 and v16**. Further releases may will support macOS, but no windows support is planned.
+This action runs only on linux and is well tested on github **latest ubuntu** runner and **compatible with Node v14, v16 and v18**. Windows and MacOS are currently not supported.
 
 ## Supported Plugins
 
