@@ -24,15 +24,16 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ./dist
-          key: build-cache-${{github.run_id}}-${{github.run_attempt}}
+          key: build-cache-${{ github.run_id }}-${{ github.run_attempt }}
 
   integration_test:
     needs: [build]
-    runs-on: ubuntu-latest
     strategy:
       matrix:
+        os: [ubuntu-20.04, ubuntu-22.04]
         version: [12, 14, 16]
-    name: Test action with Node v${{matrix.version}}
+    runs-on: ${{ matrix.os }}
+    name: Test action with Node v${{ matrix.version }} and ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
       - name: Restore build cache
@@ -40,14 +41,14 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ./dist
-          key: build-cache-${{github.run_id}}-${{github.run_attempt}}
+          key: build-cache-${{ github.run_id }}-${{ github.run_attempt }}
       - name: Ensure cache is restored
         if: steps.build-restore.outputs.cache-hit != 'true'
         run: exit 1
       - name: Run local action with latest tags
         uses: ./
         with:
-          token: ${{secrets.GITHUB_TOKEN}}
+          token: ${{ secrets.GITHUB_TOKEN }}
           use-linkcheck: true
           use-mermaid: true
           use-toc: true
@@ -73,7 +74,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ./dist
-          key: build-cache-${{github.run_id}}-${{github.run_attempt}}
+          key: build-cache-${{ github.run_id }}-${{ github.run_attempt }}
       - name: Ensure cache is restored
         if: steps.build-restore.outputs.cache-hit != 'true'
         run: exit 1
