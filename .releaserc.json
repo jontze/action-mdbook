@@ -1,6 +1,6 @@
 {
   "branches": "master",
-  "repositoryUrl": "https://github.com/jontze/action-mdbook",
+  "repositoryUrl": "git@github.com:jontze/action-mdbook.git",
   "debug": "true",
   "plugins": [
     "@semantic-release/commit-analyzer",
