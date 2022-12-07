@@ -1,3 +1,13 @@
+# [2.0.0](https://github.com/jontze/action-mdbook/compare/v1.1.1...v2.0.0) (2022-12-07)
+
+
+* feat!: Update action to node v16 ([cde4bfc](https://github.com/jontze/action-mdbook/commit/cde4bfcda6fa6f6a644b908f2a3e44a4a8d6dd88)), closes [#285](https://github.com/jontze/action-mdbook/issues/285)
+
+
+### BREAKING CHANGES
+
+* Dropping support for node v12.
+
 # [1.1.0](https://github.com/UsingPython/action-mdbook/compare/v1.0.2...v1.1.0) (2021-09-14)
 
 
