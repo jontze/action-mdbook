@@ -79,7 +79,7 @@ jobs:
         if: steps.build-restore.outputs.cache-hit != 'true'
         run: exit 1
       - name: Add Change and commit
-        uses: EndBug/add-and-commit@v7.2.1
+        uses: EndBug/add-and-commit@v9.9.1
         with:
           add: "./dist --force"
           default_author: github_actions
