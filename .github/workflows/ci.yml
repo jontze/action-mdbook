@@ -53,6 +53,7 @@ jobs:
           use-mermaid: true
           use-toc: true
           use-opengh: true
+          use-admonish: true
       - name: Test mdBook binary
         run: mdbook --version
       - name: Test mdbook-linkcheck binary
@@ -63,6 +64,8 @@ jobs:
         run: mdbook-toc --version
       - name: Test mdbook-open-on-gh binary
         run: mdbook-open-on-gh --version
+      - name: Test mdbook-admonish binary
+        run: mdbook-admonish --version
 
   release:
     needs: [integration_test]

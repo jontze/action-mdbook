@@ -1,5 +1,6 @@
 import * as core from "@actions/core";
 import { MdBook } from "./mdbook/MdBook";
+import { Admonish } from "./mdbook/plugins/Admonish";
 import { Linkcheck } from "./mdbook/plugins/Linkcheck";
 import { Mermaid } from "./mdbook/plugins/Mermaid";
 import { OpenGh } from "./mdbook/plugins/OpenGh";
@@ -34,6 +35,12 @@ const run = async () => {
   if (core.getBooleanInput("use-opengh") === true) {
     const openGhPlugin = new OpenGh();
     await openGhPlugin.setup();
+  }
+
+  // Admonish - 3rd party preprocessor plugin for mdbook to add material design
+  if (core.getBooleanInput("use-Admonish") === true) {
+    const admonishPlugin = new Admonish();
+    await admonishPlugin.setup();
   }
 };
 

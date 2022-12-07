@@ -118,3 +118,26 @@ jobs:
           use-opengh: true
       - name: Test mdbook-open-on-gh binary
         run: mdbook-open-on-gh --version || exit 1
+
+  admonish:
+    needs: [mdBook]
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-20.04, ubuntu-22.04]
+        version: [14, 16, 18]
+    runs-on: ${{ matrix.os }}
+    name: Mdbook Admonish (Node ${{ matrix.version }} - ${{ matrix.os }})
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup matrix node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.version }}
+      - name: Download latest admonish
+        uses: ./
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          use-admonish: true
+      - name: Test mdbook-admonish binary
+        run: mdbook-admonish --version || exit 1
