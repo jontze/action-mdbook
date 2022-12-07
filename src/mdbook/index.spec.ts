@@ -6,6 +6,7 @@ import * as mermaidModule from "./plugins/Mermaid";
 import * as admonishModule from "./plugins/Admonish";
 import * as openghModule from "./plugins/OpenGh";
 import * as tocModule from "./plugins/Toc";
+import * as katexModule from "./plugins/Katex";
 
 jest.mock("./MdBook");
 jest.mock("./plugins/Admonish");
@@ -13,6 +14,7 @@ jest.mock("./plugins/Linkcheck");
 jest.mock("./plugins/Mermaid");
 jest.mock("./plugins/OpenGh");
 jest.mock("./plugins/Toc");
+jest.mock("./plugins/Katex");
 
 describe("Should run action", () => {
   let spyGetBooleanInput: jest.SpyInstance<any>;
@@ -128,6 +130,24 @@ describe("Should run action", () => {
 
       expect(admonishConstructorSpy).toBeCalledTimes(1);
       expect(admonishSetupSpy).toBeCalledTimes(1);
+    });
+  });
+
+  describe("with katex plugin", () => {
+    beforeEach(() => {
+      spyGetBooleanInput.mockImplementation(
+        (activatedPlugin) => activatedPlugin === "use-katex"
+      );
+    });
+
+    it("should setup", async () => {
+      const katexConstructorSpy = jest.spyOn(katexModule, "Katex");
+      const katexSetupSpy = jest.spyOn(katexModule.Katex.prototype, "setup");
+
+      await run();
+
+      expect(katexConstructorSpy).toBeCalledTimes(1);
+      expect(katexSetupSpy).toBeCalledTimes(1);
     });
   });
 });

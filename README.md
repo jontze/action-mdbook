@@ -16,6 +16,7 @@ This action runs only on linux and is well tested on github **latest ubuntu** ru
 - [badboy/mdbook-toc](https://github.com/badboy/mdbook-toc)
 - [badboy/mdbook-open-on-gh](https://github.com/badboy/mdbook-open-on-gh)
 - [tommilligan/mdbook-admonish](https://github.com/tommilligan/mdbook-admonish)
+- [lzanini/mdbook-katex](https://github.com/lzanini/mdbook-katex)
 
 ## Fast Setup
 
@@ -41,6 +42,7 @@ jobs:
           use-toc: true
           use-opengh: true
           use-admonish: true
+          use-katex: true
       - name: Show mdbook version
         run: mdbook --version
       - name: Show linkchecker version
@@ -53,6 +55,8 @@ jobs:
         run: mdbook-open-on-gh --version
       - name: Show admonish version
         run: mdbook-admonish --version
+      - name: Show katex version
+        run: mdbook-katex --version
 ```
 
 ## Advanced Setup
@@ -83,6 +87,8 @@ jobs:
           opengh-version: "~2.0.0"
           use-admonish: true
           admonish-version: "~1.8.0"
+          use-katex: true
+          admonish-version: "~0.2.17"
       - name: Show mdbook version
         run: mdbook --version
       - name: Show linkchecker version
@@ -95,6 +101,8 @@ jobs:
         run: mdbook-open-on-gh --version
       - name: Show admonish version
         run: mdbook-admonish --version
+      - name: Show katex version
+        run: mdbook-katex --version
 ```
 
 ## Contributions

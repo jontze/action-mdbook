@@ -141,3 +141,26 @@ jobs:
           use-admonish: true
       - name: Test mdbook-admonish binary
         run: mdbook-admonish --version || exit 1
+
+  katex:
+    needs: [mdBook]
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-20.04, ubuntu-22.04]
+        version: [14, 16, 18]
+    runs-on: ${{ matrix.os }}
+    name: Mdbook Katex (Node ${{ matrix.version }} - ${{ matrix.os }})
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup matrix node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.version }}
+      - name: Download latest katex
+        uses: ./
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          use-katex: true
+      - name: Test mdbook-katex binary
+        run: mdbook-katex --version || exit 1
