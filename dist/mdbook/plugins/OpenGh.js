@@ -4,7 +4,7 @@ exports.OpenGh = void 0;
 const MdPlugin_1 = require("./MdPlugin");
 class OpenGh extends MdPlugin_1.MdPlugin {
     constructor() {
-        super("badboy/mdbook-open-on-gh", "opengh-version", "mdbook-open-on-gh", "unknown-linux-gnu");
+        super("badboy/mdbook-open-on-gh", "opengh-version", "mdbook-open-on-gh", "unknown-linux-musl");
     }
 }
 exports.OpenGh = OpenGh;

@@ -6,29 +6,6 @@
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -39,45 +16,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core = __importStar(__nccwpck_require__(2186));
-const MdBook_1 = __nccwpck_require__(7174);
-const Linkcheck_1 = __nccwpck_require__(7079);
-const Mermaid_1 = __nccwpck_require__(8883);
-const OpenGh_1 = __nccwpck_require__(7058);
-const Toc_1 = __nccwpck_require__(3853);
-/**
- * Run the action async
- */
-const run = () => __awaiter(void 0, void 0, void 0, function* () {
-    const mdBook = new MdBook_1.MdBook();
-    yield mdBook.setup();
-    // Linkcheck - 3rd party backend plugin for mdbook
-    if (core.getBooleanInput("use-linkcheck") === true) {
-        const linkcheckPlugin = new Linkcheck_1.Linkcheck();
-        yield linkcheckPlugin.setup();
-    }
-    // Mermaid - 3rd party preprocessor plugin for mdbook
-    if (core.getBooleanInput("use-mermaid") === true) {
-        const mermaidPlugin = new Mermaid_1.Mermaid();
-        yield mermaidPlugin.setup();
-    }
-    // Toc - 3rd party preprocessor plugin for mdbook
-    if (core.getBooleanInput("use-toc") === true) {
-        const tocPlugin = new Toc_1.Toc();
-        yield tocPlugin.setup();
-    }
-    // Open-On-Gh - 3rd party preprocessor plugin for mdbook
-    if (core.getBooleanInput("use-opengh") === true) {
-        const openGhPlugin = new OpenGh_1.OpenGh();
-        yield openGhPlugin.setup();
-    }
-});
+const core_1 = __nccwpck_require__(2186);
+const mdbook_1 = __nccwpck_require__(8192);
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield run();
+        yield (0, mdbook_1.run)();
     }
     catch (err) {
-        core.setFailed(`${err.message}`);
+        (0, core_1.setFailed)(`${err.message}`);
     }
 }))();
 
@@ -129,6 +75,84 @@ class MdBook {
     }
 }
 exports.MdBook = MdBook;
+
+
+/***/ }),
+
+/***/ 8192:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.run = void 0;
+const core_1 = __nccwpck_require__(2186);
+const MdBook_1 = __nccwpck_require__(7174);
+const Admonish_1 = __nccwpck_require__(7509);
+const Linkcheck_1 = __nccwpck_require__(7079);
+const Mermaid_1 = __nccwpck_require__(8883);
+const OpenGh_1 = __nccwpck_require__(7058);
+const Toc_1 = __nccwpck_require__(3853);
+/**
+ * Run the action async
+ */
+const run = () => __awaiter(void 0, void 0, void 0, function* () {
+    const mdBook = new MdBook_1.MdBook();
+    yield mdBook.setup();
+    // Linkcheck - 3rd party backend plugin for mdbook
+    if ((0, core_1.getBooleanInput)("use-linkcheck") === true) {
+        const linkcheckPlugin = new Linkcheck_1.Linkcheck();
+        yield linkcheckPlugin.setup();
+    }
+    // Mermaid - 3rd party preprocessor plugin for mdbook
+    if ((0, core_1.getBooleanInput)("use-mermaid") === true) {
+        const mermaidPlugin = new Mermaid_1.Mermaid();
+        yield mermaidPlugin.setup();
+    }
+    // Toc - 3rd party preprocessor plugin for mdbook
+    if ((0, core_1.getBooleanInput)("use-toc") === true) {
+        const tocPlugin = new Toc_1.Toc();
+        yield tocPlugin.setup();
+    }
+    // Open-On-Gh - 3rd party preprocessor plugin for mdbook
+    if ((0, core_1.getBooleanInput)("use-opengh") === true) {
+        const openGhPlugin = new OpenGh_1.OpenGh();
+        yield openGhPlugin.setup();
+    }
+    // Admonish - 3rd party preprocessor plugin for mdbook to add material design
+    if ((0, core_1.getBooleanInput)("use-admonish") === true) {
+        const admonishPlugin = new Admonish_1.Admonish();
+        yield admonishPlugin.setup();
+    }
+});
+exports.run = run;
+
+
+/***/ }),
+
+/***/ 7509:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Admonish = void 0;
+const MdPlugin_1 = __nccwpck_require__(5709);
+class Admonish extends MdPlugin_1.MdPlugin {
+    constructor() {
+        super("tommilligan/mdbook-admonish", "admonish-version", "mdbook-admonish", "unknown-linux-gnu");
+    }
+}
+exports.Admonish = Admonish;
 
 
 /***/ }),
@@ -233,7 +257,7 @@ exports.OpenGh = void 0;
 const MdPlugin_1 = __nccwpck_require__(5709);
 class OpenGh extends MdPlugin_1.MdPlugin {
     constructor() {
-        super("badboy/mdbook-open-on-gh", "opengh-version", "mdbook-open-on-gh", "unknown-linux-gnu");
+        super("badboy/mdbook-open-on-gh", "opengh-version", "mdbook-open-on-gh", "unknown-linux-musl");
     }
 }
 exports.OpenGh = OpenGh;
@@ -251,7 +275,7 @@ exports.Toc = void 0;
 const MdPlugin_1 = __nccwpck_require__(5709);
 class Toc extends MdPlugin_1.MdPlugin {
     constructor() {
-        super("badboy/mdbook-toc", "toc-version", "mdbook-toc", "unknown-linux-gnu");
+        super("badboy/mdbook-toc", "toc-version", "mdbook-toc", "unknown-linux-musl");
     }
 }
 exports.Toc = Toc;
