@@ -1,3 +1,16 @@
+# [2.1.0](https://github.com/jontze/action-mdbook/compare/v2.0.0...v2.1.0) (2023-01-11)
+
+
+### Bug Fixes
+
+* **OpenGh:** Use musl binary to remove glibc dependency ([95967b2](https://github.com/jontze/action-mdbook/commit/95967b2dc954c913f15afddf8a3eb8d5d3033e4a))
+* **toc:** Use musl binary to remove glibc dependency ([c807e4f](https://github.com/jontze/action-mdbook/commit/c807e4f5a8e9c3700324ce4bb5f362c0ec4fd496))
+
+
+### Features
+
+* **plugin:** Setup optional the admonish mdbook plugin ([5918865](https://github.com/jontze/action-mdbook/commit/591886551e2534905f2c956eaf502dcbe8666312)), closes [#300](https://github.com/jontze/action-mdbook/issues/300)
+
 # [2.0.0](https://github.com/jontze/action-mdbook/compare/v1.1.1...v2.0.0) (2022-12-07)
 
 
