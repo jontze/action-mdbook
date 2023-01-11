@@ -15,6 +15,7 @@ This action runs only on linux and is well tested on github **latest ubuntu** ru
 - [badboy/mdbook-mermaid](https://github.com/badboy/mdbook-mermaid)
 - [badboy/mdbook-toc](https://github.com/badboy/mdbook-toc)
 - [badboy/mdbook-open-on-gh](https://github.com/badboy/mdbook-open-on-gh)
+- [tommilligan/mdbook-admonish](https://github.com/tommilligan/mdbook-admonish)
 
 ## Fast Setup
 
@@ -39,6 +40,7 @@ jobs:
           use-mermaid: true
           use-toc: true
           use-opengh: true
+          use-admonish: true
       - name: Show mdbook version
         run: mdbook --version
       - name: Show linkchecker version
@@ -49,6 +51,8 @@ jobs:
         run: mdbook-toc --version
       - name: Show open-on-gh version
         run: mdbook-open-on-gh --version
+      - name: Show admonish version
+        run: mdbook-admonish --version
 ```
 
 ## Advanced Setup
@@ -77,6 +81,8 @@ jobs:
           toc-version: "~0.7.0"
           use-opengh: true
           opengh-version: "~2.0.0"
+          use-admonish: true
+          admonish-version: "~1.8.0"
       - name: Show mdbook version
         run: mdbook --version
       - name: Show linkchecker version
@@ -87,6 +93,8 @@ jobs:
         run: mdbook-toc --version
       - name: Show open-on-gh version
         run: mdbook-open-on-gh --version
+      - name: Show admonish version
+        run: mdbook-admonish --version
 ```
 
 ## Contributions

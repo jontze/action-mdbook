@@ -41,6 +41,14 @@ inputs:
     description: open-on-gh version that should be used
     required: false
     default: "latest"
+  use-admonish:
+    description: "Use admonish plugin (true / false)"
+    required: false
+    default: false
+  admonish-version:
+    description: admonish version that should be used
+    required: false
+    default: "latest"
 runs:
   using: "node16"
   main: "./dist/index.js"
