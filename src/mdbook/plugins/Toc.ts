@@ -6,7 +6,7 @@ export class Toc extends MdPlugin {
       "badboy/mdbook-toc",
       "toc-version",
       "mdbook-toc",
-      "unknown-linux-gnu"
+      "unknown-linux-musl"
     );
   }
 }
