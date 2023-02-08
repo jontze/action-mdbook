@@ -13,6 +13,7 @@ exports.run = void 0;
 const core_1 = require("@actions/core");
 const MdBook_1 = require("./MdBook");
 const Admonish_1 = require("./plugins/Admonish");
+const Katex_1 = require("./plugins/Katex");
 const Linkcheck_1 = require("./plugins/Linkcheck");
 const Mermaid_1 = require("./plugins/Mermaid");
 const OpenGh_1 = require("./plugins/OpenGh");
@@ -47,6 +48,11 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
     if ((0, core_1.getBooleanInput)("use-admonish") === true) {
         const admonishPlugin = new Admonish_1.Admonish();
         yield admonishPlugin.setup();
+    }
+    // Katex - 3rd party preprocessor plugin for mdbook rendering LaTex equations to HTML at build time
+    if ((0, core_1.getBooleanInput)("use-katex") === true) {
+        const katexPlugin = new Katex_1.Katex();
+        yield katexPlugin.setup();
     }
 });
 exports.run = run;

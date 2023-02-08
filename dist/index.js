@@ -98,6 +98,7 @@ exports.run = void 0;
 const core_1 = __nccwpck_require__(2186);
 const MdBook_1 = __nccwpck_require__(7174);
 const Admonish_1 = __nccwpck_require__(7509);
+const Katex_1 = __nccwpck_require__(6436);
 const Linkcheck_1 = __nccwpck_require__(7079);
 const Mermaid_1 = __nccwpck_require__(8883);
 const OpenGh_1 = __nccwpck_require__(7058);
@@ -133,6 +134,11 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
         const admonishPlugin = new Admonish_1.Admonish();
         yield admonishPlugin.setup();
     }
+    // Katex - 3rd party preprocessor plugin for mdbook rendering LaTex equations to HTML at build time
+    if ((0, core_1.getBooleanInput)("use-katex") === true) {
+        const katexPlugin = new Katex_1.Katex();
+        yield katexPlugin.setup();
+    }
 });
 exports.run = run;
 
@@ -153,6 +159,24 @@ class Admonish extends MdPlugin_1.MdPlugin {
     }
 }
 exports.Admonish = Admonish;
+
+
+/***/ }),
+
+/***/ 6436:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Katex = void 0;
+const MdPlugin_1 = __nccwpck_require__(5709);
+class Katex extends MdPlugin_1.MdPlugin {
+    constructor() {
+        super("lzanini/mdbook-katex", "katex-version", "mdbook-katex", "unknown-linux-musl");
+    }
+}
+exports.Katex = Katex;
 
 
 /***/ }),
