@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/jontze/action-mdbook/compare/v2.1.0...v2.2.0) (2023-02-08)
+
+
+### Features
+
+* **plugin:** Add support for the katex plugin ([7af14ca](https://github.com/jontze/action-mdbook/commit/7af14caae9ae0b0fdbc207a6456678060c858606)), closes [#301](https://github.com/jontze/action-mdbook/issues/301)
+
 # [2.1.0](https://github.com/jontze/action-mdbook/compare/v2.0.0...v2.1.0) (2023-01-11)
 
 
