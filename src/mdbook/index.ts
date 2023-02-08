@@ -1,6 +1,7 @@
 import { getBooleanInput } from "@actions/core";
 import { MdBook } from "./MdBook";
 import { Admonish } from "./plugins/Admonish";
+import { Katex } from "./plugins/Katex";
 import { Linkcheck } from "./plugins/Linkcheck";
 import { Mermaid } from "./plugins/Mermaid";
 import { OpenGh } from "./plugins/OpenGh";
@@ -41,5 +42,11 @@ export const run = async () => {
   if (getBooleanInput("use-admonish") === true) {
     const admonishPlugin = new Admonish();
     await admonishPlugin.setup();
+  }
+
+  // Katex - 3rd party preprocessor plugin for mdbook rendering LaTex equations to HTML at build time
+  if (getBooleanInput("use-katex") === true) {
+    const katexPlugin = new Katex();
+    await katexPlugin.setup();
   }
 };

@@ -49,6 +49,14 @@ inputs:
     description: admonish version that should be used
     required: false
     default: "latest"
+  use-katex:
+    description: "Use katex plugin (true / false)"
+    required: false
+    default: false
+  katex-version:
+    description: katex version that should be used
+    required: false
+    default: "latest"
 runs:
   using: "node16"
   main: "./dist/index.js"

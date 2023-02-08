@@ -54,6 +54,7 @@ jobs:
           use-toc: true
           use-opengh: true
           use-admonish: true
+          use-katex: true
       - name: Test mdBook binary
         run: mdbook --version
       - name: Test mdbook-linkcheck binary
@@ -66,6 +67,8 @@ jobs:
         run: mdbook-open-on-gh --version
       - name: Test mdbook-admonish binary
         run: mdbook-admonish --version
+      - name: Test mdbook-katex binary
+        run: mdbook-katex --version
 
   release:
     needs: [integration_test]
