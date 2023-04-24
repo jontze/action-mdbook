@@ -6,7 +6,7 @@ export class Admonish extends MdPlugin {
       "tommilligan/mdbook-admonish",
       "admonish-version",
       "mdbook-admonish",
-      "unknown-linux-gnu"
+      "unknown-linux-musl"
     );
   }
 }
