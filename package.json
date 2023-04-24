@@ -1,6 +1,6 @@
 {
   "name": "action-mdbook",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Github action to setup mdbook and optional some popular plugins",
   "main": "dist/index.js",
   "scripts": {
