@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/jontze/action-mdbook/compare/v2.2.0...v2.2.1) (2023-04-24)
+
+
+### Bug Fixes
+
+* **admonish:** Switch from gnu to musl binary to fix GLIBC version error ([f0f75f3](https://github.com/jontze/action-mdbook/commit/f0f75f322bdc8244767484a067811573be5e19c4))
+
 # [2.2.0](https://github.com/jontze/action-mdbook/compare/v2.1.0...v2.2.0) (2023-02-08)
 
 
