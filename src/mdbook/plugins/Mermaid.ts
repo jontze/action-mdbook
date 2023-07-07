@@ -6,7 +6,7 @@ export class Mermaid extends MdPlugin {
       "badboy/mdbook-mermaid",
       "mermaid-version",
       "mdbook-mermaid",
-      "unknown-linux-gnu"
+      "unknown-linux-gnu",
     );
   }
 }

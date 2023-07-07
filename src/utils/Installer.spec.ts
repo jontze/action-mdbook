@@ -50,7 +50,7 @@ describe("Installer", () => {
     const installer = new Installer(
       "downloadPath/",
       "plugin-binary-name",
-      ARCHIVE_TYPE.ZIP
+      ARCHIVE_TYPE.ZIP,
     );
     expect(installer).toBeDefined();
   });
@@ -66,7 +66,7 @@ describe("Installer", () => {
     const installer = new Installer(
       "downloadPath/",
       "plugin-binary-name",
-      ARCHIVE_TYPE.ZIP
+      ARCHIVE_TYPE.ZIP,
     );
     await installer.install();
 
@@ -86,7 +86,7 @@ describe("Installer", () => {
     const installer = new Installer(
       "downloadPath/",
       "plugin-binary-name",
-      ARCHIVE_TYPE.ZIP
+      ARCHIVE_TYPE.ZIP,
     );
     await installer.install();
 
@@ -105,7 +105,7 @@ describe("Installer", () => {
     const installer = new Installer(
       "downloadPath/",
       "plugin-binary-name",
-      ARCHIVE_TYPE.ZIP
+      ARCHIVE_TYPE.ZIP,
     );
     await installer.install();
 
@@ -123,7 +123,7 @@ describe("Installer", () => {
     const installer = new Installer(
       "downloadPath/",
       "plugin-binary-name",
-      ARCHIVE_TYPE.TAR
+      ARCHIVE_TYPE.TAR,
     );
     await installer.install();
 
@@ -141,7 +141,7 @@ describe("Installer", () => {
     const installer = new Installer(
       "downloadPath/",
       "plugin-binary-name",
-      ARCHIVE_TYPE.XAR
+      ARCHIVE_TYPE.XAR,
     );
     await installer.install();
 
@@ -159,7 +159,7 @@ describe("Installer", () => {
     const installer = new Installer(
       "downloadPath/",
       "plugin-binary-name",
-      ARCHIVE_TYPE.SEVENZ
+      ARCHIVE_TYPE.SEVENZ,
     );
     await installer.install();
 

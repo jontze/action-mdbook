@@ -12,7 +12,7 @@ export class Loader {
   constructor(
     private readonly repo: Repo,
     private readonly version: Version,
-    private readonly binaryPlatformString: string
+    private readonly binaryPlatformString: string,
   ) {}
 
   async downloadBinary(): Promise<string> {
@@ -48,7 +48,7 @@ export class Loader {
 
   private async getLatestDownloadUrl(): Promise<string> {
     const downloadUrl = (await this.repo.getLatestRelease()).assets.find(
-      (asset) => asset.browser_download_url.includes(this.binaryPlatformString)
+      (asset) => asset.browser_download_url.includes(this.binaryPlatformString),
     );
     if (downloadUrl == null) {
       // Fetch all releases and use the latest release with a matching binary
@@ -62,7 +62,7 @@ export class Loader {
           release.prerelease === false &&
           release.assets.length !== 0 &&
           release.assets.find((asset) =>
-            asset.browser_download_url.includes(this.binaryPlatformString)
+            asset.browser_download_url.includes(this.binaryPlatformString),
           )
         ) {
           version = release.tag_name;
@@ -75,7 +75,7 @@ export class Loader {
       const downloadUrlLatestValidRelease = (
         await this.repo.getReleaseByTag(version)
       ).assets.find((asset) =>
-        asset.browser_download_url.includes(this.binaryPlatformString)
+        asset.browser_download_url.includes(this.binaryPlatformString),
       );
       if (downloadUrlLatestValidRelease == null) {
         throw new Error("Download url not found!");
@@ -93,7 +93,7 @@ export class Loader {
         release.prerelease === false &&
         release.assets.length !== 0 &&
         release.assets.find((asset) =>
-          asset.browser_download_url.includes(this.binaryPlatformString)
+          asset.browser_download_url.includes(this.binaryPlatformString),
         )
       ) {
         versions.push(release.tag_name);
@@ -104,7 +104,7 @@ export class Loader {
     const downloadUrl = (
       await this.repo.getReleaseByTag(choosedVersion)
     ).assets.find((asset) =>
-      asset.browser_download_url.includes(this.binaryPlatformString)
+      asset.browser_download_url.includes(this.binaryPlatformString),
     );
     if (downloadUrl == null) {
       throw new Error("Download url not found!");

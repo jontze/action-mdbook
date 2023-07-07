@@ -73,7 +73,7 @@ describe("MdBook", () => {
     spyGetInput.mockReturnValueOnce("latest");
     spyPlatform.mockReturnValueOnce("darwin");
     expect(() => new MdBook()).toThrowError(
-      `Unsupported operating system 'darwin'. This action supports only linux.`
+      `Unsupported operating system 'darwin'. This action supports only linux.`,
     );
     expect(spyPlatform).toHaveBeenCalledTimes(1);
     expect(spyGetInput).toHaveBeenCalledWith("mdbook-version");

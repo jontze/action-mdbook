@@ -22,7 +22,7 @@ export class MdBook {
   private validateOs() {
     if (this.platform !== "linux") {
       throw new Error(
-        `Unsupported operating system '${this.platform}'. This action supports only linux.`
+        `Unsupported operating system '${this.platform}'. This action supports only linux.`,
       );
     }
   }
@@ -33,7 +33,7 @@ export class MdBook {
     const installer = new Installer(
       archivePath,
       "mdbook",
-      this.loader.archiveType
+      this.loader.archiveType,
     );
     await installer.install();
   }

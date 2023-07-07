@@ -13,7 +13,7 @@ describe("Linkcheck", () => {
       "Michael-F-Bryan/mdbook-linkcheck",
       "linkcheck-version",
       "mdbook-linkcheck",
-      "unknown-linux-gnu"
+      "unknown-linux-gnu",
     );
     expect(linkchecker).toBeDefined();
   });

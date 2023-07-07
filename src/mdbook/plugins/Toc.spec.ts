@@ -13,7 +13,7 @@ describe("Toc", () => {
       "badboy/mdbook-toc",
       "toc-version",
       "mdbook-toc",
-      "unknown-linux-musl"
+      "unknown-linux-musl",
     );
     expect(linkchecker).toBeDefined();
   });

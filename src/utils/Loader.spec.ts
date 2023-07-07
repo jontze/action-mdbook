@@ -179,7 +179,7 @@ describe("Loader", () => {
       await loader.downloadBinary();
     } catch (err: any) {
       expect(err).toEqual(
-        new Error("No release found with a matching linux binary")
+        new Error("No release found with a matching linux binary"),
       );
     }
 

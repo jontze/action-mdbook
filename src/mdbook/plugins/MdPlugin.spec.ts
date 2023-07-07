@@ -66,7 +66,7 @@ describe("MdPlugin", () => {
       "repoName",
       "test-key",
       "platformName",
-      "binaryName"
+      "binaryName",
     );
     expect(plugin).toBeDefined();
     expect(spyPlatform).toHaveBeenCalledTimes(1);
@@ -78,9 +78,9 @@ describe("MdPlugin", () => {
     spyGetInput.mockReturnValueOnce("latest");
     spyPlatform.mockReturnValueOnce("darwin");
     expect(
-      () => new MdPlugin("repoName", "test-key", "platformName", "binaryName")
+      () => new MdPlugin("repoName", "test-key", "platformName", "binaryName"),
     ).toThrowError(
-      `Unsupported operating system 'darwin'. This plugin supports only linux.`
+      `Unsupported operating system 'darwin'. This plugin supports only linux.`,
     );
     expect(spyPlatform).toHaveBeenCalledTimes(1);
     expect(spyGetInput).toHaveBeenCalledWith("test-key");
@@ -94,7 +94,7 @@ describe("MdPlugin", () => {
       "repoName",
       "test-key",
       "platformName",
-      "binaryName"
+      "binaryName",
     );
     await plugin.setup();
 
