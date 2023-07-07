@@ -12,7 +12,7 @@ export class Installer {
   constructor(
     private readonly downloadPath: string,
     private readonly binaryName: string,
-    private readonly archiveType?: ARCHIVE_TYPE
+    private readonly archiveType?: ARCHIVE_TYPE,
   ) {}
 
   private async extractArchive(): Promise<string> {

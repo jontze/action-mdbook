@@ -15,7 +15,7 @@ export class MdPlugin {
     private readonly repoName: string,
     private readonly versionKey: string,
     private readonly binaryName: string,
-    private readonly binaryPlatformName: string
+    private readonly binaryPlatformName: string,
   ) {
     this.version = new Version(getInput(this.versionKey));
     this.repo = new Repo(this.repoName);
@@ -27,7 +27,7 @@ export class MdPlugin {
   private validateOs() {
     if (this.platform !== "linux") {
       throw new Error(
-        `Unsupported operating system '${this.platform}'. This plugin supports only linux.`
+        `Unsupported operating system '${this.platform}'. This plugin supports only linux.`,
       );
     }
   }
@@ -39,7 +39,7 @@ export class MdPlugin {
     const installer = new Installer(
       archivePath,
       this.binaryName,
-      this.loader.archiveType
+      this.loader.archiveType,
     );
     await installer.install();
   }

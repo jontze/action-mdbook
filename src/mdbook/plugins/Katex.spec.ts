@@ -13,7 +13,7 @@ describe("Katex", () => {
       "lzanini/mdbook-katex",
       "katex-version",
       "mdbook-katex",
-      "unknown-linux-musl"
+      "unknown-linux-musl",
     );
     expect(katex).toBeDefined();
   });

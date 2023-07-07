@@ -6,7 +6,7 @@ export class Katex extends MdPlugin {
       "lzanini/mdbook-katex",
       "katex-version",
       "mdbook-katex",
-      "unknown-linux-musl"
+      "unknown-linux-musl",
     );
   }
 }

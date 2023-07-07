@@ -16,7 +16,7 @@ describe("Mermaid", () => {
       "badboy/mdbook-mermaid",
       "mermaid-version",
       "mdbook-mermaid",
-      "unknown-linux-gnu"
+      "unknown-linux-gnu",
     );
     expect(mermaid).toBeDefined();
   });

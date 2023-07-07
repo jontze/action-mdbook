@@ -39,7 +39,7 @@ export class Repo {
     });
     if (resReleases.status !== 200) {
       throw new Error(
-        `Request to list of releases of ${this.owner}/${this.project} failed with status code ${resReleases.status}`
+        `Request to list of releases of ${this.owner}/${this.project} failed with status code ${resReleases.status}`,
       );
     }
     return resReleases.data;
@@ -52,7 +52,7 @@ export class Repo {
     });
     if (resLatestRelease.status !== 200) {
       throw new Error(
-        `Request to latest release of ${this.owner}/${this.project} failed with status code ${resLatestRelease.status}`
+        `Request to latest release of ${this.owner}/${this.project} failed with status code ${resLatestRelease.status}`,
       );
     }
     return resLatestRelease.data;
@@ -66,7 +66,7 @@ export class Repo {
     });
     if (resTagRelease.status !== 200) {
       throw new Error(
-        `Request to release of tag '${tag}' of ${this.owner}/${this.project} failed with status code ${resTagRelease.status}`
+        `Request to release of tag '${tag}' of ${this.owner}/${this.project} failed with status code ${resTagRelease.status}`,
       );
     }
     return resTagRelease.data;

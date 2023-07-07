@@ -6,7 +6,7 @@ export class OpenGh extends MdPlugin {
       "badboy/mdbook-open-on-gh",
       "opengh-version",
       "mdbook-open-on-gh",
-      "unknown-linux-musl"
+      "unknown-linux-musl",
     );
   }
 }

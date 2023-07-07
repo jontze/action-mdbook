@@ -6,7 +6,7 @@ export class Linkcheck extends MdPlugin {
       "Michael-F-Bryan/mdbook-linkcheck",
       "linkcheck-version",
       "mdbook-linkcheck",
-      "unknown-linux-gnu"
+      "unknown-linux-gnu",
     );
   }
 }

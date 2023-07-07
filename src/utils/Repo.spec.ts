@@ -51,7 +51,7 @@ describe("Repo", () => {
 
   it("should fail without owner", () => {
     expect(() => new Repo("/repo")).toThrowError(
-      "Repository owner not defined"
+      "Repository owner not defined",
     );
   });
 

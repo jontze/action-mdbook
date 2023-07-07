@@ -37,7 +37,7 @@ describe("Should run action", () => {
   describe("with linkcheck plugin", () => {
     beforeEach(() => {
       spyGetBooleanInput.mockImplementation(
-        (activatedPlugin) => activatedPlugin === "use-linkcheck"
+        (activatedPlugin) => activatedPlugin === "use-linkcheck",
       );
     });
 
@@ -45,7 +45,7 @@ describe("Should run action", () => {
       const linkcheckConstructorSpy = jest.spyOn(linkcheckModule, "Linkcheck");
       const linkcheckSetupSpy = jest.spyOn(
         linkcheckModule.Linkcheck.prototype,
-        "setup"
+        "setup",
       );
 
       await run();
@@ -58,7 +58,7 @@ describe("Should run action", () => {
   describe("with mermaid plugin", () => {
     beforeEach(() => {
       spyGetBooleanInput.mockImplementation(
-        (activatedPlugin) => activatedPlugin === "use-mermaid"
+        (activatedPlugin) => activatedPlugin === "use-mermaid",
       );
     });
 
@@ -66,7 +66,7 @@ describe("Should run action", () => {
       const mermaidConstructorSpy = jest.spyOn(mermaidModule, "Mermaid");
       const mermaidSetupSpy = jest.spyOn(
         mermaidModule.Mermaid.prototype,
-        "setup"
+        "setup",
       );
 
       await run();
@@ -79,7 +79,7 @@ describe("Should run action", () => {
   describe("with toc plugin", () => {
     beforeEach(() => {
       spyGetBooleanInput.mockImplementation(
-        (activatedPlugin) => activatedPlugin === "use-toc"
+        (activatedPlugin) => activatedPlugin === "use-toc",
       );
     });
 
@@ -97,7 +97,7 @@ describe("Should run action", () => {
   describe("with opengh plugin", () => {
     beforeEach(() => {
       spyGetBooleanInput.mockImplementation(
-        (activatedPlugin) => activatedPlugin === "use-opengh"
+        (activatedPlugin) => activatedPlugin === "use-opengh",
       );
     });
 
@@ -115,7 +115,7 @@ describe("Should run action", () => {
   describe("with admonish plugin", () => {
     beforeEach(() => {
       spyGetBooleanInput.mockImplementation(
-        (activatedPlugin) => activatedPlugin === "use-admonish"
+        (activatedPlugin) => activatedPlugin === "use-admonish",
       );
     });
 
@@ -123,7 +123,7 @@ describe("Should run action", () => {
       const admonishConstructorSpy = jest.spyOn(admonishModule, "Admonish");
       const admonishSetupSpy = jest.spyOn(
         admonishModule.Admonish.prototype,
-        "setup"
+        "setup",
       );
 
       await run();
@@ -136,7 +136,7 @@ describe("Should run action", () => {
   describe("with katex plugin", () => {
     beforeEach(() => {
       spyGetBooleanInput.mockImplementation(
-        (activatedPlugin) => activatedPlugin === "use-katex"
+        (activatedPlugin) => activatedPlugin === "use-katex",
       );
     });
 
