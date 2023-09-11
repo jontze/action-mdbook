@@ -15,7 +15,7 @@ describe("OpenGh", () => {
       "badboy/mdbook-open-on-gh",
       "opengh-version",
       "mdbook-open-on-gh",
-      "unknown-linux-musl",
+      "x86_64-unknown-linux-musl",
     );
   });
 });
