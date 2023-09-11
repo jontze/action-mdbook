@@ -1,3 +1,10 @@
+## [2.2.2](https://github.com/jontze/action-mdbook/compare/v2.2.1...v2.2.2) (2023-09-11)
+
+
+### Bug Fixes
+
+* Prevent that executable is downloaded for incorrect architecture ([e054ff2](https://github.com/jontze/action-mdbook/commit/e054ff2232d508f1967e43e9df4aeab28ada4b89))
+
 ## [2.2.1](https://github.com/jontze/action-mdbook/compare/v2.2.0...v2.2.1) (2023-04-24)
 
 
