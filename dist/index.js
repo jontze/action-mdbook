@@ -155,7 +155,7 @@ exports.Admonish = void 0;
 const MdPlugin_1 = __nccwpck_require__(5709);
 class Admonish extends MdPlugin_1.MdPlugin {
     constructor() {
-        super("tommilligan/mdbook-admonish", "admonish-version", "mdbook-admonish", "unknown-linux-musl");
+        super("tommilligan/mdbook-admonish", "admonish-version", "mdbook-admonish", "x86_64-unknown-linux-musl");
     }
 }
 exports.Admonish = Admonish;
@@ -173,7 +173,7 @@ exports.Katex = void 0;
 const MdPlugin_1 = __nccwpck_require__(5709);
 class Katex extends MdPlugin_1.MdPlugin {
     constructor() {
-        super("lzanini/mdbook-katex", "katex-version", "mdbook-katex", "unknown-linux-musl");
+        super("lzanini/mdbook-katex", "katex-version", "mdbook-katex", "x86_64-unknown-linux-musl");
     }
 }
 exports.Katex = Katex;
@@ -281,7 +281,7 @@ exports.OpenGh = void 0;
 const MdPlugin_1 = __nccwpck_require__(5709);
 class OpenGh extends MdPlugin_1.MdPlugin {
     constructor() {
-        super("badboy/mdbook-open-on-gh", "opengh-version", "mdbook-open-on-gh", "unknown-linux-musl");
+        super("badboy/mdbook-open-on-gh", "opengh-version", "mdbook-open-on-gh", "x86_64-unknown-linux-musl");
     }
 }
 exports.OpenGh = OpenGh;
@@ -299,7 +299,7 @@ exports.Toc = void 0;
 const MdPlugin_1 = __nccwpck_require__(5709);
 class Toc extends MdPlugin_1.MdPlugin {
     constructor() {
-        super("badboy/mdbook-toc", "toc-version", "mdbook-toc", "unknown-linux-musl");
+        super("badboy/mdbook-toc", "toc-version", "mdbook-toc", "x86_64-unknown-linux-musl");
     }
 }
 exports.Toc = Toc;
