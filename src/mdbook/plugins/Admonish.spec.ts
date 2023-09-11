@@ -13,7 +13,7 @@ describe("Admonish", () => {
       "tommilligan/mdbook-admonish",
       "admonish-version",
       "mdbook-admonish",
-      "unknown-linux-musl",
+      "x86_64-unknown-linux-musl",
     );
     expect(admonish).toBeDefined();
   });
