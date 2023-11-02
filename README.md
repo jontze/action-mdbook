@@ -32,8 +32,8 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: jontze/action-mdbook@v2
+      - uses: actions/checkout@v4
+      - uses: jontze/action-mdbook@v3
         with:
           token: ${{secrets.GITHUB_TOKEN}}
           # Optional Plugins have to be enabled
@@ -71,8 +71,8 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: jontze/action-mdbook@v2
+      - uses: actions/checkout@v4
+      - uses: jontze/action-mdbook@v3
         with:
           token: ${{secrets.GITHUB_TOKEN}}
           # Optional Plugins have to be enabled with a version
