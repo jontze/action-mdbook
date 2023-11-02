@@ -5,9 +5,9 @@
 
 ## Introduction
 
-This is an github action to set up the [rust-lang/mdBook](https://github.com/rust-lang/mdBook) with some [supported plugins](#supported-plugins).
+This is an GitHub Action to set up the [rust-lang/mdBook](https://github.com/rust-lang/mdBook) with some [supported plugins](#supported-plugins).
 
-This action runs only on linux and is well tested on github **latest ubuntu** runner and **compatible with Node v14, v16 and v18**. Windows and MacOS are currently not supported.
+This action runs only on linux and is well tested on GitHubs **latest ubuntu** runner and **compatible with Node v18 and v20**. Windows and MacOS are not supported.
 
 ## Supported Plugins
 
