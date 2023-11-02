@@ -1,14 +1,10 @@
 import { getOctokit } from "@actions/github";
 import { getInput } from "@actions/core";
-import { Octokit } from "@octokit/core";
-import { PaginateInterface } from "@octokit/plugin-paginate-rest";
-import { Api } from "@octokit/plugin-rest-endpoint-methods/dist-types/types";
-
-type GhOctoKit = Octokit & Api & { paginate: PaginateInterface };
+import { GitHub } from "@actions/github/lib/utils";
 
 export class Repo {
   private readonly token?: string;
-  private readonly octokit: GhOctoKit;
+  private readonly octokit: InstanceType<typeof GitHub>;
   readonly owner: string;
   readonly project: string;
 
