@@ -14776,12 +14776,7 @@ class LRUCache {
   }
 
   delete (key) {
-    if (this.map.has(key)) {
-      this.map.delete(key)
-      return true
-    } else {
-      return false
-    }
+    return this.map.delete(key)
   }
 
   set (key, value) {
