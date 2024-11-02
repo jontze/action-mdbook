@@ -88,7 +88,7 @@ jobs:
           use-admonish: true
           admonish-version: "~1.8.0"
           use-katex: true
-          admonish-version: "~0.2.17"
+          katex-version: "~0.2.17"
       - name: Show mdbook version
         run: mdbook --version
       - name: Show linkchecker version
