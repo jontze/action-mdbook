@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/jontze/action-mdbook/compare/v3.0.0...v3.0.1) (2024-11-02)
+
+
+### Bug Fixes
+
+* **deps:** Upgrade dependencies in lockfile ([ae500e1](https://github.com/jontze/action-mdbook/commit/ae500e16ce5fdfe2c9897278bd865d6187a42bde))
+
 # [3.0.0](https://github.com/jontze/action-mdbook/compare/v2.2.2...v3.0.0) (2023-11-02)
 
 
