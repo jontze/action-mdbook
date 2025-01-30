@@ -1,3 +1,13 @@
+# [4.0.0](https://github.com/jontze/action-mdbook/compare/v3.0.1...v4.0.0) (2025-01-30)
+
+
+* fix!: Switch from gnu to musl mdbook binary ([a48500a](https://github.com/jontze/action-mdbook/commit/a48500a252d2b74f32a2c7925dfc221227f8aaed))
+
+
+### BREAKING CHANGES
+
+* Switch from gnu to musl mdbook binary
+
 ## [3.0.1](https://github.com/jontze/action-mdbook/compare/v3.0.0...v3.0.1) (2024-11-02)
 
 
