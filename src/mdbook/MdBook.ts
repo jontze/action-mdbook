@@ -15,7 +15,11 @@ export class MdBook {
     this.version = new Version(getInput("mdbook-version"));
     this.repo = new Repo("rust-lang/mdBook");
     this.platform = platform();
-    this.loader = new Loader(this.repo, this.version, "unknown-linux-gnu");
+    this.loader = new Loader(
+      this.repo,
+      this.version,
+      "x86_64-unknown-linux-musl",
+    );
     this.validateOs();
   }
 
