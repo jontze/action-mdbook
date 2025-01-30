@@ -21,7 +21,7 @@ class MdBook {
         this.version = new Version_1.Version((0, core_1.getInput)("mdbook-version"));
         this.repo = new Repo_1.Repo("rust-lang/mdBook");
         this.platform = (0, os_1.platform)();
-        this.loader = new Loader_1.Loader(this.repo, this.version, "unknown-linux-gnu");
+        this.loader = new Loader_1.Loader(this.repo, this.version, "x86_64-unknown-linux-musl");
         this.validateOs();
     }
     validateOs() {
