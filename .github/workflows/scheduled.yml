@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, ubuntu-22.04, ubuntu-24.04]
+        os: [ubuntu-22.04, ubuntu-24.04]
         version: [18, 20]
     runs-on: ${{ matrix.os }}
     name: MdBook (Node ${{ matrix.version }} - ${{ matrix.os }})
@@ -32,7 +32,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, ubuntu-22.04, ubuntu-24.04]
+        os: [ubuntu-22.04, ubuntu-24.04]
         version: [18, 20]
     runs-on: ${{ matrix.os }}
     name: Mdbook Linkcheck (Node ${{ matrix.version }} - ${{ matrix.os }})
@@ -55,7 +55,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, ubuntu-22.04, ubuntu-24.04]
+        os: [ubuntu-22.04, ubuntu-24.04]
         version: [18, 20]
     runs-on: ${{ matrix.os }}
     name: Mdbook Mermaid (Node ${{ matrix.version }} - ${{ matrix.os }})
@@ -78,7 +78,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, ubuntu-22.04, ubuntu-24.04]
+        os: [ubuntu-22.04, ubuntu-24.04]
         version: [18, 20]
     runs-on: ${{ matrix.os }}
     name: Mdbook ToC (Node ${{ matrix.version }} - ${{ matrix.os }})
@@ -101,7 +101,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, ubuntu-22.04, ubuntu-24.04]
+        os: [ubuntu-22.04, ubuntu-24.04]
         version: [18, 20]
     runs-on: ${{ matrix.os }}
     name: Mdbook OpenOnGh (Node ${{ matrix.version }} - ${{ matrix.os }})
@@ -124,7 +124,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, ubuntu-22.04, ubuntu-24.04]
+        os: [ubuntu-22.04, ubuntu-24.04]
         version: [18, 20]
     runs-on: ${{ matrix.os }}
     name: Mdbook Admonish (Node ${{ matrix.version }} - ${{ matrix.os }})
@@ -147,7 +147,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, ubuntu-22.04, ubuntu-24.04]
+        os: [ubuntu-22.04, ubuntu-24.04]
         version: [18, 20]
     runs-on: ${{ matrix.os }}
     name: Mdbook Katex (Node ${{ matrix.version }} - ${{ matrix.os }})
