@@ -18,7 +18,7 @@ runs:
         name: lcov.info
         path: coverage/
     - name: SonarCloud Scan
-      uses: SonarSource/sonarqube-scan-action@v5.1.0
+      uses: SonarSource/sonarqube-scan-action@v5.3.1
       env:
         GITHUB_TOKEN: ${{ inputs.github_token }}
         SONAR_TOKEN: ${{ inputs.sonar_token }}
