@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Setup matrix node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.version }}
       - name: Download latest mdbook
@@ -39,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Setup matrix node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.version }}
       - name: Download latest linkcheck
@@ -62,7 +62,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Setup matrix node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.version }}
       - name: Download latest mermaid
@@ -85,7 +85,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Setup matrix node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.version }}
       - name: Download latest toc
@@ -108,7 +108,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Setup matrix node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.version }}
       - name: Download latest open-on-gh
@@ -131,7 +131,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Setup matrix node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.version }}
       - name: Download latest admonish
@@ -154,7 +154,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Setup matrix node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.version }}
       - name: Download latest katex
