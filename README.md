@@ -11,7 +11,7 @@ This action runs only on linux and is well tested on GitHubs **latest ubuntu** r
 
 ## Supported Plugins
 
-- [Michael-F-Bryan/mdbook-linkcheck](https://github.com/Michael-F-Bryan/mdbook-linkcheck)
+- [marxin/mdbook-linkcheck2](https://github.com/marxin/mdbook-linkcheck2)
 - [badboy/mdbook-mermaid](https://github.com/badboy/mdbook-mermaid)
 - [badboy/mdbook-toc](https://github.com/badboy/mdbook-toc)
 - [badboy/mdbook-open-on-gh](https://github.com/badboy/mdbook-open-on-gh)

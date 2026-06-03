@@ -3,9 +3,9 @@ import { MdPlugin } from "./MdPlugin";
 export class Linkcheck extends MdPlugin {
   constructor() {
     super(
-      "Michael-F-Bryan/mdbook-linkcheck",
+      "marxin/mdbook-linkcheck2",
       "linkcheck-version",
-      "mdbook-linkcheck",
+      "mdbook-linkcheck2",
       "unknown-linux-gnu",
     );
   }

@@ -10,9 +10,9 @@ describe("Linkcheck", () => {
     const linkchecker = new Linkcheck();
 
     expect(constructorSpy).toHaveBeenCalledWith(
-      "Michael-F-Bryan/mdbook-linkcheck",
+      "marxin/mdbook-linkcheck2",
       "linkcheck-version",
-      "mdbook-linkcheck",
+      "mdbook-linkcheck2",
       "unknown-linux-gnu",
     );
     expect(linkchecker).toBeDefined();
